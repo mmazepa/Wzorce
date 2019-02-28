@@ -11,8 +11,14 @@ class SingletonTest {
     }
 
     public static void main(String[] args) {
-        Singleton firstInstance = Singleton.getInstance();
-        Singleton secondInstance = Singleton.getInstance();
-        compareInstances(firstInstance, secondInstance);
+        Singleton instance1 = Singleton.getInstance();
+        Singleton instance2 = Singleton.getInstance();
+        compareInstances(instance1, instance2);
+
+        Singleton instance3;
+        Singleton instance4;
+        new Thread(() -> { instance3 = Singleton.getInstance(); }).start();
+        new Thread(() -> { instance4 = Singleton.getInstance(); }).start();
+        compareInstances(instance3, instance4);
     }
 }
