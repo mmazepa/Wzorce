@@ -5,14 +5,16 @@
 *.log
 
 # Package Files #
-#*.jar
+*.jar
 *.war
 *.ear
 *.zip
 *.tar.gz
 *.rar
 
+# Serialize Files #
+*.ser
+
 # Ignore work files
 .vscode
 .~*
-
