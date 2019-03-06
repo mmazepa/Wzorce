@@ -1,6 +1,7 @@
-class Singleton {
-    
-	private static Singleton instance;
+import java.io.Serializable;
+
+class Singleton implements Serializable {
+  private static Singleton instance;
 
 	private Singleton() {
     	System.out.println("Singleton(): Inicjalizowanie instacji!");
@@ -13,8 +14,13 @@ class Singleton {
 					System.out.println("getInstance(): Pierwsze wywołanie!");
 					instance = new Singleton();
 				}
-			}            
+			}
 		}
 		return instance;
 	}
+
+  protected Object readResolve()
+  {
+    return instance;
+  }
 }
