@@ -5,17 +5,22 @@ abstract class SongPrototype {
 }
 
 class Song extends SongPrototype implements Cloneable {
+  private String tag;
   private String author;
   private String title;
   private Duration duration;
   private int year;
 
-  public Song(String author, String title, Duration duration, int year) {
+  public Song(String tag, String author, String title, Duration duration, int year) {
+    this.tag = tag;
     this.author = author;
     this.title = title;
     this.duration = duration;
     this.year = year;
   }
+
+  String getTag() { return this.tag; }
+  void setTag(String tag) { this.tag = tag; }
 
   String getAuthor() { return this.author; }
   void setAuthor(String author) { this.author = author; }
@@ -39,6 +44,7 @@ class Song extends SongPrototype implements Cloneable {
     return this.author + ", \"" + this.title + "\", " + this.prepareDuration() + ", " + this.year;
   }
 
+  @Override
   public SongPrototype Clone() throws CloneNotSupportedException {
     System.out.println("[CLONING]:  " + this.stringify());
     return (SongPrototype) this.clone();

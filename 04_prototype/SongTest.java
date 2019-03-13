@@ -1,48 +1,42 @@
 import java.time.Duration;
-import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 class SongTest {
-  public static ArrayList<Song> songsToTest = new ArrayList<Song>();
-
-  public static void songDetails(Song song) {
-    System.out.println(song.stringify());
-  }
+  public static SongManager am = new SongManager();
 
   public static void displayBoth(Song originalSong, Song clonedSong) {
-    System.out.print("[Original]: ");
-    songDetails(originalSong);
-    System.out.print("[TheClone]: ");
-    songDetails(clonedSong);
+    System.out.println("   [Original]: " + originalSong.stringify());
+    System.out.println("   [TheClone]: " + clonedSong.stringify());
   }
 
-  public static String equalOrNot(String string1, String string2) {
-    if (string1.equals(string2)) return "equal";
-    else return "not equal";
-  }
+  public static void testCloning(String key, Song song) throws CloneNotSupportedException {
+    Song clonedSong = (Song) am.getSong(key).Clone();
 
-  public static void testCloning(Song song) throws CloneNotSupportedException {
-    SongManager am = new SongManager();
-    am.setSong("cartoon", song);
-    Song clonedSong = (Song) am.getSong("cartoon").Clone();
-
-    displayBoth(song, clonedSong);
     song.setAuthor("NEW AUTHOR");
     clonedSong.setTitle("NEW TITLE");
-    System.out.println("-------------");
     displayBoth(song, clonedSong);
 
-    System.out.println(" ===> [author]: " + equalOrNot(song.getAuthor(), clonedSong.getAuthor()));
-    System.out.println(" ===> [title]:  " + equalOrNot(song.getTitle(), clonedSong.getTitle()));
+    System.out.println("[original vs. clone]");
+    System.out.println("   [EQUALS?]: " + song.equals(clonedSong));
+    System.out.println("   [s1==s2?]: " + (song == clonedSong));
   }
 
   public static void main(String[] args) throws CloneNotSupportedException {
-    songsToTest.add(new Song("Robbie Rotten", "We Are Number One", Duration.ofSeconds(2*60+18), 2014));
-    songsToTest.add(new Song("Jonathan Young", "BAIT", Duration.ofSeconds(2*60+43), 2018));
-    songsToTest.add(new Song("Turbo", "Strażnik Światła", Duration.ofSeconds(8*60+21), 2009));
+    Song song1 = new Song("cartoon", "Robbie Rotten", "We Are Number One", Duration.ofSeconds(2*60+18), 2014);
+    Song song2 = new Song("rock", "Jonathan Young", "BAIT", Duration.ofSeconds(2*60+43), 2018);
+    Song song3 = new Song("metal", "Turbo", "Strażnik Światła", Duration.ofSeconds(8*60+21), 2009);
 
-    for (Song song : songsToTest) {
-      testCloning(song);
-      System.out.println("---------------------------------------------");
-    }
+    am.setSong(song1.getTag(), song1);
+    am.setSong(song2.getTag(), song2);
+    am.setSong(song3.getTag(), song3);
+
+    System.out.println("---------------------------------------------");
+    testCloning(song1.getTag(), song1);
+    System.out.println("---------------------------------------------");
+    testCloning(song2.getTag(), song2);
+    System.out.println("---------------------------------------------");
+    testCloning(song3.getTag(), song3);
+    System.out.println("---------------------------------------------");
   }
 }
