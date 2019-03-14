@@ -3,7 +3,7 @@ class ThreadTest implements Runnable {
   public void run() {
     String threadName = Thread.currentThread().getName();
     int hashCode = Singleton.getInstance().hashCode();
-    SingletonTest2.hm.put(threadName, hashCode);
+    SingletonTest.hm.put(threadName, hashCode);
     System.out.println(threadName + " : " + hashCode);
   }
 }

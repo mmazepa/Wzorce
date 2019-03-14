@@ -19,8 +19,10 @@ class Singleton implements Serializable {
 		return instance;
 	}
 
-  protected Object readResolve()
-  {
-    return instance;
+  protected Object readResolve() {
+    System.out.println("readResolve(): Wykonanie!");
+    if (instance == null) return getInstance(); // return from deserialization
+    else return instance;
+    //return instance;
   }
 }

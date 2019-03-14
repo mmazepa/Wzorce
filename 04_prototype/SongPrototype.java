@@ -46,7 +46,7 @@ class Song extends SongPrototype implements Cloneable {
 
   @Override
   public SongPrototype Clone() throws CloneNotSupportedException {
-    System.out.println("[CLONING]:  " + this.stringify());
+    System.out.println("[CLONING]: " + this.stringify());
     return (SongPrototype) this.clone();
   }
 }
