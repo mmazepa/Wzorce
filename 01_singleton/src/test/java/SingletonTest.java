@@ -21,6 +21,7 @@ public class SingletonTest {
 
   @BeforeClass
   public static void setUpClass() throws FileNotFoundException, IOException, ClassNotFoundException {
+    sm.mainHeader();
     System.out.println("Rozpoczęcie testowania...");
     System.out.println("-------------------------------------------------------");
     System.out.println("Tworzenie pliku 'instance.ser'.");
@@ -67,7 +68,7 @@ public class SingletonTest {
     Singleton instance1 = Singleton.getInstance();
     Singleton instance2 = Singleton.getInstance();
 
-    assertThat(instance1.hashCode(), equalTo(instance2.hashCode()));
+    assertThat(instance2.hashCode(), equalTo(instance1.hashCode()));
     sm.displayHashCodes(instance1, instance2);
   }
 
@@ -76,7 +77,7 @@ public class SingletonTest {
     sm.testHeader("Thread Safe Test");
 
     ArrayList<Thread> threads = new ArrayList<Thread>();
-    int threadsAmount = 15;
+    int threadsAmount = 50;
     String threadName = "Thread_";
 
     for (int i = 0; i < threadsAmount; i++) {
@@ -92,10 +93,10 @@ public class SingletonTest {
       }
     });
 
-    System.out.println("Wszystkie wątki zakończyły działanie.");
-    System.out.println("Liczba dostępnych rdzeni: " + Runtime.getRuntime().availableProcessors());
+    System.out.println("\nWszystkie wątki zakończyły działanie.");
+    System.out.println("Dostępnych rdzeni: " + Runtime.getRuntime().availableProcessors());
     int hcSize = SimpleThread.hashCodes.size();
-    System.out.println("Wątki/sukces/porażka:     " + threadsAmount + "/" + hcSize + "/" + (threadsAmount-hcSize));
+    System.out.println("Wątki:             " + threadsAmount + "/" + hcSize + "/" + (threadsAmount-hcSize));
 
     Set<Integer> hashCodes = new HashSet<Integer>(SimpleThread.hashCodes.values());
 
@@ -114,7 +115,7 @@ public class SingletonTest {
     instance2 = sm.deserialize(filename);
 
     assertThat(instance2, instanceOf(Singleton.class));
-    assertThat(instance1.hashCode(), equalTo(instance2.hashCode()));
+    assertThat(instance2.hashCode(), equalTo(instance1.hashCode()));
     sm.displayHashCodes(instance1, instance2);
   }
 
@@ -125,7 +126,7 @@ public class SingletonTest {
     Singleton instance1 = sm.deserialize(filename);
     Singleton instance2 = Singleton.getInstance();
 
-    assertThat(instance2, instanceOf(Singleton.class));
+    assertThat(instance1, instanceOf(Singleton.class));
     assertThat(instance1.hashCode(), equalTo(instance2.hashCode()));
     sm.displayHashCodes(instance1, instance2);
   }

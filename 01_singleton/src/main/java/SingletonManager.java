@@ -8,25 +8,29 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
 public class SingletonManager {
-  public static void howManyFrames(String frame, int times) {
-    for (int i = 0; i < times; i++) {
-      System.out.print(frame);
-    }
+  public static void mainHeader() {
+    System.out.println(" _____ _         _     _             _____         _   ");
+    System.out.println("|   __|_|___ ___| |___| |_ ___ ___  |_   _|___ ___| |_ ");
+    System.out.println("|__   | |   | . | | -_|  _| . |   |   | | | -_|_ -|  _|");
+    System.out.println("|_____|_|_|_|_  |_|___|_| |___|_|_|   |_| |___|___|_|  ");
+    System.out.println("            |___|                                      ");
+  }
+
+  public static String howManyFrames(String frame, int times) {
+    String pattern = frame;
+    while (frame.length() < times) frame += pattern;
+    return frame;
   }
 
   public static void testHeader(String testInfo) {
-    System.out.print("╔");
-    howManyFrames("═", testInfo.length() + 2);
-    System.out.print("╗\n");
+    System.out.print("╔" + howManyFrames("═", testInfo.length() + 2) + "╗\n");
     System.out.println("║ " + testInfo + " ║");
-    System.out.print("╚");
-    howManyFrames("═", testInfo.length() + 2);
-    System.out.print("╝\n");
+    System.out.print("╚" + howManyFrames("═", testInfo.length() + 2) + "╝\n");
   }
 
   public static void displayHashCodes(Singleton instance1, Singleton instance2) {
-      System.out.println("Instance 1: " + instance1.hashCode());
-      System.out.println("Instance 2: " + instance2.hashCode());
+      System.out.println("Instance 1:    " + instance1.hashCode());
+      System.out.println("Instance 2:    " + instance2.hashCode());
   }
 
   public static void serialize(Singleton instance, String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
