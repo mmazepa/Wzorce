@@ -1,20 +1,36 @@
-# Compiled class file
+# use glob syntax.
+syntax: glob
 *.class
+*~
+*.bak
+*.old
 
-# Log file
+# logs
 *.log
+
+# eclipse conf file
+.settings/
+.settings
+
+# building
+target
+tmp*
+dist
+
+# other scm
+.svn
+.CVS
+.hg*
+
+target/
+.settings/
+.classpath
+.project
 
 # Package Files #
 *.jar
 *.war
 *.ear
-*.zip
-*.tar.gz
-*.rar
 
-# Serialize Files #
+# Serialized Files #
 *.ser
-
-# Ignore work files
-.vscode
-.~*
