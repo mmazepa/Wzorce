@@ -67,7 +67,7 @@ public class SingletonTest {
     Singleton instance1 = Singleton.getInstance();
     Singleton instance2 = Singleton.getInstance();
 
-    assertEquals(instance1.hashCode(), instance2.hashCode());
+    assertThat(instance1.hashCode(), equalTo(instance2.hashCode()));
     sm.displayHashCodes(instance1, instance2);
   }
 
@@ -96,10 +96,11 @@ public class SingletonTest {
     System.out.println("Liczba dostępnych rdzeni: " + Runtime.getRuntime().availableProcessors());
     int hcSize = SimpleThread.hashCodes.size();
     System.out.println("Wątki/sukces/porażka:     " + threadsAmount + "/" + hcSize + "/" + (threadsAmount-hcSize));
+
     Set<Integer> hashCodes = new HashSet<Integer>(SimpleThread.hashCodes.values());
 
-    assertEquals(threadsAmount, SimpleThread.hashCodes.size());
-    assertEquals(1, hashCodes.size());
+    assertThat(SimpleThread.hashCodes.size(), equalTo(threadsAmount));
+    assertThat(hashCodes.size(), equalTo(1));
   }
 
   @Test
@@ -112,7 +113,8 @@ public class SingletonTest {
     sm.serialize(instance1, filename);
     instance2 = sm.deserialize(filename);
 
-    assertEquals(instance1.hashCode(), instance2.hashCode());
+    assertThat(instance2, instanceOf(Singleton.class));
+    assertThat(instance1.hashCode(), equalTo(instance2.hashCode()));
     sm.displayHashCodes(instance1, instance2);
   }
 
@@ -123,7 +125,8 @@ public class SingletonTest {
     Singleton instance1 = sm.deserialize(filename);
     Singleton instance2 = Singleton.getInstance();
 
-    assertEquals(instance1.hashCode(), instance2.hashCode());
+    assertThat(instance2, instanceOf(Singleton.class));
+    assertThat(instance1.hashCode(), equalTo(instance2.hashCode()));
     sm.displayHashCodes(instance1, instance2);
   }
 }
