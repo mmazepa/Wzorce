@@ -9,6 +9,10 @@ import static org.hamcrest.CoreMatchers.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 public class SingletonTest {
 
@@ -17,27 +21,29 @@ public class SingletonTest {
 
   @BeforeClass
   public static void setUpClass() throws FileNotFoundException, IOException, ClassNotFoundException {
-    // Before testing
-    System.out.println("Tests start!");
+    System.out.println("Rozpoczęcie testowania...");
+    System.out.println("-------------------------------------------------------");
+    System.out.println("Tworzenie pliku 'instance.ser'.");
     sm.serialize(Singleton.getInstance(), filename);
+    System.out.println("Czyszczenie pamięci, instancja ustawiona na 'null'.");
+    resetSingleton(Singleton.class, "instance");
   }
 
   @AfterClass
   public static void tearDownClass() {
-    // After testing
+    System.out.println("Usuwanie pliku 'instance.ser'.");
+    new File(filename).delete();
     System.out.println("-------------------------------------------------------");
-    System.out.println("Tests end!");
+    System.out.println("Testowanie zakończone.");
   }
 
   @Before
   public void setUp() {
-    // Before every test
     System.out.println("-------------------------------------------------------");
   }
 
   @After
   public void tearDown() {
-    // After every test
     System.out.println("-------------------------------------------------------");
     System.out.println("Czyszczenie pamięci, instancja ustawiona na 'null'.");
     resetSingleton(Singleton.class, "instance");
@@ -63,6 +69,37 @@ public class SingletonTest {
 
     assertEquals(instance1.hashCode(), instance2.hashCode());
     sm.displayHashCodes(instance1, instance2);
+  }
+
+  @Test
+  public void threadSafeTest() {
+    sm.testHeader("Thread Safe Test");
+
+    ArrayList<Thread> threads = new ArrayList<Thread>();
+    int threadsAmount = 15;
+    String threadName = "Thread_";
+
+    for (int i = 0; i < threadsAmount; i++) {
+      threads.add(new Thread(new SimpleThread(), threadName + (i+1)));
+    }
+
+    threads.parallelStream().forEach((thread) -> {
+      thread.start();
+      try {
+        thread.join();
+      } catch (InterruptedException ie) {
+        ie.printStackTrace();
+      }
+    });
+
+    System.out.println("Wszystkie wątki zakończyły działanie.");
+    System.out.println("Liczba dostępnych rdzeni: " + Runtime.getRuntime().availableProcessors());
+    int hcSize = SimpleThread.hashCodes.size();
+    System.out.println("Wątki/sukces/porażka:     " + threadsAmount + "/" + hcSize + "/" + (threadsAmount-hcSize));
+    Set<Integer> hashCodes = new HashSet<Integer>(SimpleThread.hashCodes.values());
+
+    assertEquals(threadsAmount, SimpleThread.hashCodes.size());
+    assertEquals(1, hashCodes.size());
   }
 
   @Test
