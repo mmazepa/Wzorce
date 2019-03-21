@@ -1,18 +1,18 @@
 import java.io.Serializable;
 
-class Factory implements Serializable {
-  private static Factory factory;
+class SimpleFactory implements Serializable {
+  private static SimpleFactory factory;
 
-	private Factory() {
-    	System.out.println("Factory(): Inicjalizowanie instacji.");
+	private SimpleFactory() {
+    	System.out.println("SimpleFactory(): Inicjalizowanie instacji.");
 	}
 
-	public static Factory getInstance() {
+	public static SimpleFactory getInstance() {
 		if (factory == null) {
-			synchronized(Factory.class) {
+			synchronized(SimpleFactory.class) {
 				if (factory == null) {
 					System.out.println("getInstance(): Pierwsze wywołanie.");
-					factory = new Factory();
+					factory = new SimpleFactory();
 				}
 			}
 		}
@@ -20,6 +20,7 @@ class Factory implements Serializable {
 	}
 
   // makeJuice(...) nie jest open-close (!!!)
+  //...ponoć w fabryce prostej tak właśnie ma być (?!)
   public static Juice makeJuice (String fruit, double capacity) {
     if (fruit == "orange") return new OrangeJuice(fruit, capacity);
     else if (fruit == "strawberry") return new StrawberryJuice(fruit, capacity);
@@ -30,6 +31,7 @@ class Factory implements Serializable {
   }
 
   // makeBeer(...) nie jest open-close (!!!)
+  //...ponoć w fabryce prostej tak właśnie ma być (?!)
   public static Beer makeBeer (String type, double capacity, double alcohol) {
     if (type == "lager") return new LagerBeer(type, capacity, alcohol);
     else if (type == "wheat") return new WheatBeer(type, capacity, alcohol);
@@ -40,6 +42,7 @@ class Factory implements Serializable {
   }
 
   // makeTea(...) nie jest open-close (!!!)
+  //...ponoć w fabryce prostej tak właśnie ma być (?!)
   public static Tea makeTea (String taste, double capacity) {
     if (taste == "black") return new BlackTea(taste, capacity);
     else if (taste == "green") return new GreenTea(taste, capacity);

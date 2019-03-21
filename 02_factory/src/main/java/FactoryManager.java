@@ -28,7 +28,12 @@ public class FactoryManager {
     System.out.print("╚" + howManyFrames("═", testInfo.length() + 2) + "╝\n");
   }
 
-  public static void displayHashCodes(Factory factory1, Factory factory2) {
+  public static void displayHashCodes(SimpleFactory factory1, SimpleFactory factory2) {
+      System.out.println("Instance 1: " + factory1.hashCode());
+      System.out.println("Instance 2: " + factory2.hashCode());
+  }
+
+  public static void displayHashCodes(FactoryMethod factory1, FactoryMethod factory2) {
       System.out.println("Instance 1: " + factory1.hashCode());
       System.out.println("Instance 2: " + factory2.hashCode());
   }

@@ -18,7 +18,7 @@ public class FactoryTest {
     System.out.println("Rozpoczęcie testowania...");
     System.out.println("-------------------------------------------------------");
     System.out.println("Czyszczenie pamięci, instancja ustawiona na 'null'.");
-    resetFactory(Factory.class, "factory");
+    resetFactory(SimpleFactory.class, "factory");
   }
 
   @AfterClass
@@ -36,7 +36,7 @@ public class FactoryTest {
   public void tearDown() {
     System.out.println("-------------------------------------------------------");
     System.out.println("Czyszczenie pamięci, instancja ustawiona na 'null'.");
-    resetFactory(Factory.class, "factory");
+    resetFactory(SimpleFactory.class, "factory");
   }
 
   public static void resetFactory(Class theClass, String fieldName) {
@@ -51,11 +51,22 @@ public class FactoryTest {
   }
 
   @Test
-  public void simpleFactorySingletonTest() {
-    fm.testHeader("Simple Factory Singleton Test");
+  public void simpleSimpleFactorySingletonTest() {
+    fm.testHeader("SimpleFactory Singleton Test");
 
-    Factory factory1 = Factory.getInstance();
-    Factory factory2 = Factory.getInstance();
+    SimpleFactory factory1 = SimpleFactory.getInstance();
+    SimpleFactory factory2 = SimpleFactory.getInstance();
+
+    assertThat(factory2.hashCode(), equalTo(factory1.hashCode()));
+    fm.displayHashCodes(factory1, factory2);
+  }
+
+  @Test
+  public void simpleFactoryMethodSingletonTest() {
+    fm.testHeader("FactoryMethod Singleton Test");
+
+    FactoryMethod factory1 = FactoryMethod.getInstance();
+    FactoryMethod factory2 = FactoryMethod.getInstance();
 
     assertThat(factory2.hashCode(), equalTo(factory1.hashCode()));
     fm.displayHashCodes(factory1, factory2);
@@ -65,7 +76,7 @@ public class FactoryTest {
   public void makeJuiceTest() {
     fm.testHeader("Make Juice Test");
 
-    Factory factory = Factory.getInstance();
+    SimpleFactory factory = SimpleFactory.getInstance();
 
     Juice juice1 = factory.makeJuice("orange", 500);
     System.out.println(juice1.getClass());
@@ -96,7 +107,7 @@ public class FactoryTest {
   public void makeBeerTest() {
     fm.testHeader("Make Beer Test");
 
-    Factory factory = Factory.getInstance();
+    SimpleFactory factory = SimpleFactory.getInstance();
 
     Beer beer1 = factory.makeBeer("lager", 500, 7);
     System.out.println(beer1.getClass());
@@ -128,7 +139,7 @@ public class FactoryTest {
   public void makeTeaTest() {
     fm.testHeader("Make Tea Test");
 
-    Factory factory = Factory.getInstance();
+    SimpleFactory factory = SimpleFactory.getInstance();
 
     Tea tea1 = factory.makeTea("black", 500);
     System.out.println(tea1.getClass());
