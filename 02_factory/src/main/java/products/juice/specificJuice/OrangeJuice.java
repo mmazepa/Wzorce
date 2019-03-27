@@ -1,16 +1,47 @@
 class OrangeJuice implements Juice {
-  protected double capacity;
+  // protected double capacity;
 
-  public OrangeJuice() {}
-
-  public OrangeJuice(double capacity) {
-    this.capacity = capacity;
+  public OrangeJuice() {
+    peelFruit();
+    squeezeFruit();
+    addSomeFruitPulp();
+    addSugar();
+    stirJuice();
   }
 
-  public void setCapacity() {
-    this.capacity = capacity;
+  @Override
+  public void peelFruit() {
+    System.out.println("Obieram pomarańcze...");
   }
-  public double getCapacity() {
-    return capacity;
+
+  @Override
+  public void squeezeFruit() {
+    System.out.println("Wyciskam pomarańcze...");
   }
+
+  @Override
+  public void addSomeFruitPulp() {
+    System.out.println("Dodaję odrobinę miąższu pomarańczy...");
+  }
+
+  @Override
+  public void addSugar() {
+    System.out.println("Dodaję cukier do soku z pomarańczy...");
+  }
+
+  @Override
+  public void stirJuice() {
+    System.out.println("Mieszam sok z pomarańczy...");
+  }
+
+  // public OrangeJuice(double capacity) {
+  //   this.capacity = capacity;
+  // }
+  //
+  // public void setCapacity() {
+  //   this.capacity = capacity;
+  // }
+  // public double getCapacity() {
+  //   return capacity;
+  // }
 }

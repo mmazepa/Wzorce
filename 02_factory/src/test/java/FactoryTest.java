@@ -79,16 +79,19 @@ public class FactoryTest {
     SimpleFactory factory = SimpleFactory.getInstance();
 
     Juice juice1 = factory.makeJuice("orange");
-    Juice juice2 = factory.makeJuice("strawberry");
-    Juice juice3 = factory.makeJuice("kiwi");
-    Juice juice4 = factory.makeJuice("mango");
-    Juice juice5 = factory.makeJuice("pomegranate");
+    System.out.println("===> " + juice1.getClass());
 
-    System.out.println(juice1.getClass());
-    System.out.println(juice2.getClass());
-    System.out.println(juice3.getClass());
-    System.out.println(juice4.getClass());
-    System.out.println(juice5.getClass());
+    Juice juice2 = factory.makeJuice("strawberry");
+    System.out.println("===> " + juice2.getClass());
+
+    Juice juice3 = factory.makeJuice("kiwi");
+    System.out.println("===> " + juice3.getClass());
+
+    Juice juice4 = factory.makeJuice("mango");
+    System.out.println("===> " + juice4.getClass());
+
+    Juice juice5 = factory.makeJuice("pomegranate");
+    System.out.println("===> " + juice5.getClass());
 
     assertThat(juice1, instanceOf(OrangeJuice.class));
     assertThat(juice2, instanceOf(StrawberryJuice.class));
@@ -105,22 +108,22 @@ public class FactoryTest {
 
     factory = new PolishFactory();
     Juice juice1 = factory.makeJuice("orange");
+    System.out.println("===> " + juice1.getClass());
     Juice juice2 = factory.makeJuice("strawberry");
+    System.out.println("===> " + juice2.getClass());
 
     factory = new AmericanFactory();
     Juice juice3 = factory.makeJuice("kiwi");
+    System.out.println("===> " + juice3.getClass());
 
     factory = new GermanFactory();
     Juice juice4 = factory.makeJuice("mango");
+    System.out.println("===> " + juice4.getClass());
 
     factory = new EnglishFactory();
     Juice juice5 = factory.makeJuice("pomegranate");
+    System.out.println("===> " + juice5.getClass());
 
-    System.out.println(juice1.getClass());
-    System.out.println(juice2.getClass());
-    System.out.println(juice3.getClass());
-    System.out.println(juice4.getClass());
-    System.out.println(juice5.getClass());
 
     assertThat(juice1, instanceOf(OrangeJuice.class));
     assertThat(juice2, instanceOf(StrawberryJuice.class));
@@ -241,5 +244,19 @@ public class FactoryTest {
     assertThat(tea3, instanceOf(RedTea.class));
     assertThat(tea4, instanceOf(WhiteTea.class));
     assertThat(tea5, instanceOf(YellowTea.class));
+  }
+
+  @Test
+  public void abstractFactoryTest() {
+    fm.testHeader("Abstract Factory Test");
+
+    Computer computer;
+    for (int i = 0; i < 5; i++) {
+      String pcName = "PC-" + (i+1);
+      if (i%2 == 0)
+        computer = new Computer(pcName, new AMDFactory());
+      else
+        computer = new Computer(pcName, new IntelFactory());
+    }
   }
 }

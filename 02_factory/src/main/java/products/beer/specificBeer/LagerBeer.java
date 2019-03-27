@@ -9,16 +9,22 @@ class LagerBeer implements Beer {
     this.alcohol = alcohol;
   }
 
+  @Override
   public void setCapacity(double capacity) {
     this.capacity = capacity;
   }
+
+  @Override
   public double getCapacity() {
     return capacity;
   }
 
+  @Override
   public void setAlcohol(double alcohol) {
     this.alcohol = alcohol;
   }
+
+  @Override
   public double getAlcohol() {
     return alcohol;
   }

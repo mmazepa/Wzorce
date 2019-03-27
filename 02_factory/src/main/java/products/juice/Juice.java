@@ -1,3 +1,8 @@
 interface Juice {
-  public double getCapacity();
+  // public void getCapacity();
+  public void peelFruit();
+  public void squeezeFruit();
+  public void addSomeFruitPulp();
+  public void addSugar();
+  public void stirJuice();
 }
