@@ -19,41 +19,35 @@ class SimpleFactory implements Serializable {
 		return factory;
 	}
 
-  // makeJuice(...) nie jest open-close (!!!)
-  //...ponoć w fabryce prostej tak właśnie ma być (?!)
-  public static Juice makeJuice (String fruit, double capacity) {
-    if (fruit == "orange") return new OrangeJuice(fruit, capacity);
-    else if (fruit == "strawberry") return new StrawberryJuice(fruit, capacity);
-    else if (fruit == "kiwi") return new KiwiJuice(fruit, capacity);
-    else if (fruit == "mango") return new MangoJuice(fruit, capacity);
-    else if (fruit == "pomegranate") return new PomegranateJuice(fruit, capacity);
-    return null;
+  public static Juice makeJuice (String type) {
+    if (type == "orange") return new OrangeJuice();
+    else if (type == "strawberry") return new StrawberryJuice();
+    else if (type == "kiwi") return new KiwiJuice();
+    else if (type == "mango") return new MangoJuice();
+    else if (type == "pomegranate") return new PomegranateJuice();
+    else return null;
   }
 
-  // makeBeer(...) nie jest open-close (!!!)
-  //...ponoć w fabryce prostej tak właśnie ma być (?!)
-  public static Beer makeBeer (String type, double capacity, double alcohol) {
-    if (type == "lager") return new LagerBeer(type, capacity, alcohol);
-    else if (type == "wheat") return new WheatBeer(type, capacity, alcohol);
-    else if (type == "pilzner") return new PilznerBeer(type, capacity, alcohol);
-    else if (type == "porter") return new PorterBeer(type, capacity, alcohol);
-    else if (type == "stout") return new StoutBeer(type, capacity, alcohol);
-    return null;
+  public static Beer makeBeer (String type) {
+    if (type == "lager") return new LagerBeer();
+    else if (type == "wheat") return new WheatBeer();
+    else if (type == "pilzner") return new PilznerBeer();
+    else if (type == "porter") return new PorterBeer();
+    else if (type == "stout") return new StoutBeer();
+    else return null;
   }
 
-  // makeTea(...) nie jest open-close (!!!)
-  //...ponoć w fabryce prostej tak właśnie ma być (?!)
-  public static Tea makeTea (String taste, double capacity) {
-    if (taste == "black") return new BlackTea(taste, capacity);
-    else if (taste == "green") return new GreenTea(taste, capacity);
-    else if (taste == "red") return new RedTea(taste, capacity);
-    else if (taste == "white") return new WhiteTea(taste, capacity);
-    else if (taste == "yellow") return new YellowTea(taste, capacity);
+  public static Tea makeTea (String type) {
+    if (type == "black") return new BlackTea();
+    else if (type == "green") return new GreenTea();
+    else if (type == "red") return new RedTea();
+    else if (type == "white") return new WhiteTea();
+    else if (type == "yellow") return new YellowTea();
     return null;
   }
 
   protected Object readResolve() {
-    if (factory == null) factory = this;
+    factory = this;
     return factory;
   }
 }

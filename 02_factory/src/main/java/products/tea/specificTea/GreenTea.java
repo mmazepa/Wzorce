@@ -1,20 +1,15 @@
 class GreenTea implements Tea {
-  protected String taste;
   protected double capacity;
 
-  public GreenTea(String taste, double capacity) {
-    this.taste = taste;
+  public GreenTea() {}
+
+  public GreenTea(double capacity) {
     this.capacity = capacity;
   }
 
-  public void getDetails() {
-    System.out.println(taste + " tea (capacity: " + capacity + " ml)");
+  public void setCapacity() {
+    this.capacity = capacity;
   }
-
-  public String getTaste() {
-    return taste;
-  }
-
   public double getCapacity() {
     return capacity;
   }

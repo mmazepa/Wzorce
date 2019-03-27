@@ -1,20 +1,15 @@
 class StrawberryJuice implements Juice {
-  protected String fruit;
   protected double capacity;
 
-  public StrawberryJuice(String fruit, double capacity) {
-    this.fruit = fruit;
+  public StrawberryJuice() {}
+
+  public StrawberryJuice(double capacity) {
     this.capacity = capacity;
   }
 
-  public void getDetails() {
-    System.out.println(fruit + " juice (capacity: " + capacity + " ml)");
+  public void setCapacity() {
+    this.capacity = capacity;
   }
-
-  public String getFruit() {
-    return fruit;
-  }
-
   public double getCapacity() {
     return capacity;
   }
