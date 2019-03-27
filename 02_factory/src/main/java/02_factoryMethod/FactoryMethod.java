@@ -1,28 +1,28 @@
 import java.io.Serializable;
 
-class FactoryMethod implements Serializable {
+abstract class FactoryMethod implements Serializable {
   private static FactoryMethod factory;
 
-	private FactoryMethod() {
-    	System.out.println("FactoryMethod(): Inicjalizowanie instacji.");
-	}
+	// private FactoryMethod() {
+  public FactoryMethod() { }
 
 	public static FactoryMethod getInstance() {
 		if (factory == null) {
 			synchronized(FactoryMethod.class) {
 				if (factory == null) {
-					System.out.println("getInstance(): Pierwsze wywołanie.");
-					factory = new FactoryMethod();
+					// factory = new FactoryMethod();
 				}
 			}
 		}
 		return factory;
 	}
 
-  //...
+  protected abstract Juice makeJuice(String type);
+  protected abstract Beer makeBeer(String type);
+  protected abstract Tea makeTea(String type);
 
   protected Object readResolve() {
-    if (factory == null) factory = this;
+    factory = this;
     return factory;
   }
 }
