@@ -20,29 +20,29 @@ class SimpleFactory implements Serializable {
 	}
 
   public static Juice makeJuice (String type) {
-    if (type == "orange") return new OrangeJuice();
-    else if (type == "strawberry") return new StrawberryJuice();
-    else if (type == "kiwi") return new KiwiJuice();
-    else if (type == "mango") return new MangoJuice();
-    else if (type == "pomegranate") return new PomegranateJuice();
+    if (type.equals("orange")) return new OrangeJuice();
+    else if (type.equals("strawberry")) return new StrawberryJuice();
+    else if (type.equals("kiwi")) return new KiwiJuice();
+    else if (type.equals("mango")) return new MangoJuice();
+    else if (type.equals("pomegranate")) return new PomegranateJuice();
     else return null;
   }
 
   public static Beer makeBeer (String type) {
-    if (type == "lager") return new LagerBeer();
-    else if (type == "wheat") return new WheatBeer();
-    else if (type == "pilzner") return new PilznerBeer();
-    else if (type == "porter") return new PorterBeer();
-    else if (type == "stout") return new StoutBeer();
+    if (type.equals("lager")) return new LagerBeer();
+    else if (type.equals("wheat")) return new WheatBeer();
+    else if (type.equals("pilzner")) return new PilznerBeer();
+    else if (type.equals("porter")) return new PorterBeer();
+    else if (type.equals("stout")) return new StoutBeer();
     else return null;
   }
 
   public static Tea makeTea (String type) {
-    if (type == "black") return new BlackTea();
-    else if (type == "green") return new GreenTea();
-    else if (type == "red") return new RedTea();
-    else if (type == "white") return new WhiteTea();
-    else if (type == "yellow") return new YellowTea();
+    if (type.equals("black")) return new BlackTea();
+    else if (type.equals("green")) return new GreenTea();
+    else if (type.equals("red")) return new RedTea();
+    else if (type.equals("white")) return new WhiteTea();
+    else if (type.equals("yellow")) return new YellowTea();
     return null;
   }
 
