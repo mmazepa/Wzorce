@@ -1,13 +1,6 @@
 class KiwiJuice implements Juice {
-  // protected double capacity;
 
-  public KiwiJuice() {
-    peelFruit();
-    squeezeFruit();
-    addSomeFruitPulp();
-    addSugar();
-    stirJuice();
-  }
+  public KiwiJuice() {}
 
   @Override
   public void peelFruit() {
@@ -34,14 +27,12 @@ class KiwiJuice implements Juice {
     System.out.println("Mieszam sok z kiwi...");
   }
 
-  // public KiwiJuice(double capacity) {
-  //   this.capacity = capacity;
-  // }
-  //
-  // public void setCapacity() {
-  //   this.capacity = capacity;
-  // }
-  // public double getCapacity() {
-  //   return capacity;
-  // }
+  @Override
+  public void prepare() {
+    peelFruit();
+    squeezeFruit();
+    addSomeFruitPulp();
+    addSugar();
+    stirJuice();
+  }
 }

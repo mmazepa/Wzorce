@@ -1,13 +1,6 @@
 class MangoJuice implements Juice {
-  // protected double capacity;
 
-  public MangoJuice() {
-    peelFruit();
-    squeezeFruit();
-    addSomeFruitPulp();
-    addSugar();
-    stirJuice();
-  }
+  public MangoJuice() {}
 
   @Override
   public void peelFruit() {
@@ -34,14 +27,12 @@ class MangoJuice implements Juice {
     System.out.println("Mieszam sok z mango...");
   }
 
-  // public MangoJuice(double capacity) {
-  //   this.capacity = capacity;
-  // }
-  //
-  // public void setCapacity() {
-  //   this.capacity = capacity;
-  // }
-  // public double getCapacity() {
-  //   return capacity;
-  // }
+  @Override
+  public void prepare() {
+    peelFruit();
+    squeezeFruit();
+    addSomeFruitPulp();
+    addSugar();
+    stirJuice();
+  }
 }

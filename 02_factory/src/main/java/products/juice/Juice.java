@@ -5,4 +5,5 @@ interface Juice {
   public void addSomeFruitPulp();
   public void addSugar();
   public void stirJuice();
+  public void prepare();
 }
