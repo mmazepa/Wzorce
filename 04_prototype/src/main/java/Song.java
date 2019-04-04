@@ -2,12 +2,12 @@ import java.time.Duration;
 
 class Song extends SongPrototype implements Cloneable {
   private String tag;
-  private String author;
+  private Person author;
   private String title;
   private Duration duration;
   private int year;
 
-  public Song(String tag, String author, String title, Duration duration, int year) {
+  public Song(String tag, Person author, String title, Duration duration, int year) {
     this.tag = tag;
     this.author = author;
     this.title = title;
@@ -15,11 +15,15 @@ class Song extends SongPrototype implements Cloneable {
     this.year = year;
   }
 
+  public Song(Song song) {
+    this(song.getTag(), new Person(song.getAuthor()), song.getTitle(), song.getDuration(), song.getYear());
+  }
+
   String getTag() { return this.tag; }
   void setTag(String tag) { this.tag = tag; }
 
-  String getAuthor() { return this.author; }
-  void setAuthor(String author) { this.author = author; }
+  Person getAuthor() { return this.author; }
+  void setAuthor(Person author) { this.author = author; }
 
   String getTitle() { return this.title; }
   void setTitle(String title) { this.title = title; }
@@ -37,12 +41,18 @@ class Song extends SongPrototype implements Cloneable {
   }
 
   public String stringify() {
-    return this.author + ", \"" + this.title + "\", " + this.prepareDuration() + ", " + this.year;
+    return this.author.toString() + ", \"" + this.title + "\", " + this.prepareDuration() + ", " + this.year;
   }
 
   @Override
-  public SongPrototype Clone() throws CloneNotSupportedException {
-    System.out.println("[CLONING]: " + this.stringify());
+  public SongPrototype ShallowCopy() throws CloneNotSupportedException {
+    System.out.println("[SHALLOW COPYING]: " + this.stringify());
     return (SongPrototype) this.clone();
+  }
+
+  @Override
+  public SongPrototype DeepCopy() throws CloneNotSupportedException {
+    System.out.println("[DEEP COPYING]: " + this.stringify());
+    return (SongPrototype) new Song(this);
   }
 }

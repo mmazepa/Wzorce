@@ -1,5 +1,4 @@
-import java.time.Duration;
-
 abstract class SongPrototype {
-  public abstract SongPrototype Clone() throws CloneNotSupportedException;
+  public abstract SongPrototype ShallowCopy() throws CloneNotSupportedException;
+  public abstract SongPrototype DeepCopy() throws CloneNotSupportedException;
 }

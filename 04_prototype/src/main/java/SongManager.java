@@ -12,9 +12,8 @@ class SongManager {
     songs.put(key, songPrototype);
   }
 
-  public static void displayBoth(Song originalSong, Song clonedSong) {
-    System.out.println("   [Original]: " + originalSong.stringify());
-    System.out.println("   [TheClone]: " + clonedSong.stringify());
+  public static Map<String, SongPrototype> getAllSongs() {
+    return songs;
   }
 
   public static void mainHeader() {
@@ -37,15 +36,11 @@ class SongManager {
     System.out.print("╚" + howManyFrames("═", testInfo.length() + 2) + "╝\n");
   }
 
-  public static void testCloning(String key, Song song) throws CloneNotSupportedException {
-    Song clonedSong = (Song) getSong(key).Clone();
-
-    song.setAuthor("NEW AUTHOR");
-    clonedSong.setTitle("NEW TITLE");
-    displayBoth(song, clonedSong);
-
-    System.out.println("[original vs. clone]");
-    System.out.println("   [EQUALS?]: " + song.equals(clonedSong));
-    System.out.println("   [s1==s2?]: " + (song == clonedSong));
+  public static void displayBoth(String typeOfCopy, Song originalSong, Song clonedSong) {
+    String original = "   [Oryginał]: ";
+    typeOfCopy = "   [" + typeOfCopy + "Copy]: ";
+    while (original.length() < typeOfCopy.length()) original += " ";
+    System.out.println(original + originalSong.stringify());
+    System.out.println(typeOfCopy + clonedSong.stringify());
   }
 }
