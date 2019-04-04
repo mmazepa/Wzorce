@@ -1,9 +1,5 @@
 import java.time.Duration;
 
-abstract class SongPrototype {
-  public abstract SongPrototype Clone() throws CloneNotSupportedException;
-}
-
 class Song extends SongPrototype implements Cloneable {
   private String tag;
   private String author;
