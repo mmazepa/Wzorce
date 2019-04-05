@@ -1,13 +1,6 @@
 class StrawberryJuice implements Juice {
-  // protected double capacity;
 
-  public StrawberryJuice() {
-    peelFruit();
-    squeezeFruit();
-    addSomeFruitPulp();
-    addSugar();
-    stirJuice();
-  }
+  public StrawberryJuice() {}
 
   @Override
   public void peelFruit() {
@@ -34,14 +27,12 @@ class StrawberryJuice implements Juice {
     System.out.println("Mieszam sok z truskawek...");
   }
 
-  // public StrawberryJuice(double capacity) {
-  //   this.capacity = capacity;
-  // }
-  //
-  // public void setCapacity() {
-  //   this.capacity = capacity;
-  // }
-  // public double getCapacity() {
-  //   return capacity;
-  // }
+  @Override
+  public void prepare() {
+    peelFruit();
+    squeezeFruit();
+    addSomeFruitPulp();
+    addSugar();
+    stirJuice();
+  }
 }

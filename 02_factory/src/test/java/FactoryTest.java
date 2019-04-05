@@ -7,18 +7,30 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.*;
 
 import java.lang.reflect.Field;
+import java.util.Map;
+import java.util.HashMap;
 
 public class FactoryTest {
 
   static FactoryManager fm = new FactoryManager();
+
+  static Map<String, Class> juices = new HashMap<String, Class>();
+  static Map<String, Class> beers = new HashMap<String, Class>();
+  static Map<String, Class> teas = new HashMap<String, Class>();
 
   @BeforeClass
   public static void setUpClass() {
     fm.mainHeader();
     System.out.println("Rozpoczęcie testowania...");
     System.out.println("-------------------------------------------------------");
-    System.out.println("Czyszczenie pamięci, instancja ustawiona na 'null'.");
-    resetFactory(SimpleFactory.class, "factory");
+    // System.out.println("Czyszczenie pamięci, instancja ustawiona na 'null'.");
+    // resetFactory(SimpleFactory.class, "factory");
+    System.out.println("Przygotowanie soków...");
+    juices.put("orange", OrangeJuice.class);
+    juices.put("kiwi", KiwiJuice.class);
+    juices.put("mango", MangoJuice.class);
+    juices.put("pomegranate", PomegranateJuice.class);
+    juices.put("strawberry", StrawberryJuice.class);
   }
 
   @AfterClass
@@ -78,26 +90,16 @@ public class FactoryTest {
 
     SimpleFactory factory = SimpleFactory.getInstance();
 
-    Juice juice1 = factory.makeJuice("orange");
-    System.out.println("===> " + juice1.getClass());
+    for (Map.Entry<String, Class> entry : juices.entrySet()) {
+      String wantedJuice = entry.getKey();
+      Class expectedClass = entry.getValue();
 
-    Juice juice2 = factory.makeJuice("strawberry");
-    System.out.println("===> " + juice2.getClass());
-
-    Juice juice3 = factory.makeJuice("kiwi");
-    System.out.println("===> " + juice3.getClass());
-
-    Juice juice4 = factory.makeJuice("mango");
-    System.out.println("===> " + juice4.getClass());
-
-    Juice juice5 = factory.makeJuice("pomegranate");
-    System.out.println("===> " + juice5.getClass());
-
-    assertThat(juice1, instanceOf(OrangeJuice.class));
-    assertThat(juice2, instanceOf(StrawberryJuice.class));
-    assertThat(juice3, instanceOf(KiwiJuice.class));
-    assertThat(juice4, instanceOf(MangoJuice.class));
-    assertThat(juice5, instanceOf(PomegranateJuice.class));
+      System.out.println("1) ZAMÓWIENIE: " + expectedClass);
+      Juice juice = factory.makeJuice(wantedJuice);
+      juice.prepare();
+      System.out.println("2) ODBIÓR:     " + juice.getClass());
+      assertThat(juice, instanceOf(expectedClass));
+    }
   }
 
   @Test
@@ -108,21 +110,21 @@ public class FactoryTest {
 
     factory = new PolishFactory();
     Juice juice1 = factory.makeJuice("orange");
-    System.out.println("===> " + juice1.getClass());
+    System.out.println(juice1.getClass());
     Juice juice2 = factory.makeJuice("strawberry");
-    System.out.println("===> " + juice2.getClass());
+    System.out.println(juice2.getClass());
 
     factory = new AmericanFactory();
     Juice juice3 = factory.makeJuice("kiwi");
-    System.out.println("===> " + juice3.getClass());
+    System.out.println(juice3.getClass());
 
     factory = new GermanFactory();
     Juice juice4 = factory.makeJuice("mango");
-    System.out.println("===> " + juice4.getClass());
+    System.out.println(juice4.getClass());
 
     factory = new EnglishFactory();
     Juice juice5 = factory.makeJuice("pomegranate");
-    System.out.println("===> " + juice5.getClass());
+    System.out.println(juice5.getClass());
 
 
     assertThat(juice1, instanceOf(OrangeJuice.class));

@@ -1,13 +1,6 @@
 class PomegranateJuice implements Juice {
-  // protected double capacity;
 
-  public PomegranateJuice() {
-    peelFruit();
-    squeezeFruit();
-    addSomeFruitPulp();
-    addSugar();
-    stirJuice();
-  }
+  public PomegranateJuice() {}
 
   @Override
   public void peelFruit() {
@@ -34,14 +27,12 @@ class PomegranateJuice implements Juice {
     System.out.println("Mieszam sok z granatów...");
   }
 
-  // public PomegranateJuice(double capacity) {
-  //   this.capacity = capacity;
-  // }
-  //
-  // public void setCapacity() {
-  //   this.capacity = capacity;
-  // }
-  // public double getCapacity() {
-  //   return capacity;
-  // }
+  @Override
+  public void prepare() {
+    peelFruit();
+    squeezeFruit();
+    addSomeFruitPulp();
+    addSugar();
+    stirJuice();
+  }
 }
