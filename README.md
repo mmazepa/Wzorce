@@ -12,29 +12,19 @@ w roku akademickim 2018/2019.
     <th>Punkty</th>
   </tr>
   <tr>
-    <td rowspan="5">Zadania małe</td>
+    <td rowspan="3">Zadania małe</td>
     <td>21.03.2019</td>
     <td>Singleton</td>
     <td>3.5/4 pkt</td>
   </tr>
   <tr>
-    <td>04.04.2019</td>
+    <td>11.04.2019</td>
     <td>Fabryka</td>
     <td>-</td>
   </tr>
   <tr>
     <td>11.04.2019</td>
     <td>Prototyp</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>-</td>
     <td>-</td>
   </tr>
   <tr>
@@ -49,7 +39,7 @@ w roku akademickim 2018/2019.
     <td>Zadanie duże (projekt)</td>
     <td>-</td>
     <td>-</td>
-    <td>??/20 pkt</td>
+    <td>0/20 pkt</td>
   </tr>
   <tr>
     <td colspan="3" align="right"><b>SUMA (ogółem):</b></td>
