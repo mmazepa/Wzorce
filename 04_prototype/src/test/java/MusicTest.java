@@ -5,35 +5,36 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.time.Duration;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-public class SongTest {
-
-  static Person author1 = new Person("Robbie", "Rotten");
-  static Person author2 = new Person("Jonathan", "Young");
-  static Person author3 = new Person("Michał", "Jelonek");
+public class MusicTest {
+  static Person author1;
+  static Person author2;
+  static Person author3;
 
   static String tag1 = "robbie";
   static String tag2 = "john_young";
   static String tag3 = "jelonek";
 
-  static Song song1 = new Song(tag1, author1, "We Are Number One", Duration.ofSeconds(2*60+18), 2014);
-  static Song song2 = new Song(tag2, author2, "BAIT", Duration.ofSeconds(2*60+43), 2018);
-  static Song song3 = new Song(tag3, author3, "Akka", Duration.ofSeconds(2*60+33), 2007);
+  static Song song1;
+  static Song song2;
+  static Song song3;
 
+  static String albumTag = "various_artist";
+  static String albumTitle = "Zagraniczne Przeboje";
+  static Album album;
+
+  static DisplayManager dm = new DisplayManager();
+  static AlbumManager am = new AlbumManager();
   static SongManager sm = new SongManager();
 
   @BeforeClass
   public static void setUpClass() {
-    sm.mainHeader();
-
-    sm.setSong(tag1, song1);
-    sm.setSong(tag2, song2);
-    sm.setSong(tag3, song3);
-
+    dm.mainHeader();
     System.out.println("Rozpoczęcie testowania...");
     // System.out.println("───────────────────────────────────────────────────────");
   }
@@ -46,6 +47,26 @@ public class SongTest {
 
   @Before
   public void setUp() {
+    author1 = new Person("Robbie", "Rotten");
+    author2 = new Person("Jonathan", "Young");
+    author3 = new Person("Michał", "Jelonek");
+
+    song1 = new Song(tag1, author1, "We Are Number One", Duration.ofSeconds(2*60+18), 2014);
+    song2 = new Song(tag2, author2, "BAIT", Duration.ofSeconds(2*60+43), 2018);
+    song3 = new Song(tag3, author3, "Akka", Duration.ofSeconds(2*60+33), 2007);
+
+    sm.setSong(tag1, song1);
+    sm.setSong(tag2, song2);
+    sm.setSong(tag3, song3);
+
+    ArrayList<Song> tracklist = new ArrayList<Song>();
+    tracklist.add(song1);
+    tracklist.add(song2);
+    tracklist.add(song3);
+
+    album = new Album(albumTag, albumTitle, tracklist, am.sumDurations(tracklist), am.getLatestYear(tracklist));
+    am.setAlbum(albumTag, album);
+
     System.out.println("───────────────────────────────────────────────────────");
   }
 
@@ -55,8 +76,8 @@ public class SongTest {
   }
 
   @Test
-  public void shallowCopyTest() throws CloneNotSupportedException {
-    sm.testHeader("Shallow Copy Test");
+  public void song_shallowCopyTest() throws CloneNotSupportedException {
+    dm.testHeader("Zad1. Shallow Copy Test");
 
     Song song1_shallowCopy = (Song) sm.getSong(song1.getTag()).ShallowCopy();
     song1.getAuthor().setFirstName("Robert");
@@ -76,8 +97,8 @@ public class SongTest {
   }
 
   @Test
-  public void deepCopyTest() throws CloneNotSupportedException {
-    sm.testHeader("Deep Copy Test");
+  public void song_deepCopyTest() throws CloneNotSupportedException {
+    dm.testHeader("Zad1. Deep Copy Test");
 
     Song song1_deepCopy = (Song) sm.getSong(song1.getTag()).DeepCopy();
     song1.getAuthor().setFirstName("Robert");
@@ -97,5 +118,32 @@ public class SongTest {
     sm.displayBoth("Deep", song3, song3_deepCopy);
     assertNotEquals(song3.getAuthor(), song3_deepCopy.getAuthor());
     assertNotSame(song3.getAuthor(), song3_deepCopy.getAuthor());
+  }
+
+  @Test
+  public void album_shallowCopyTest() throws CloneNotSupportedException {
+    dm.testHeader("Zad2. Shallow Copy Test");
+
+    Album album_shallowCopy = (Album) am.getAlbum(album.getTag()).ShallowCopy();
+    album.getTracklist().get(0).getAuthor().setFirstName("Flobby");
+    System.out.print("───[ORYGINAŁ]──────────────────────────────────────────");
+    System.out.println(album.stringify());
+    System.out.print("───[SHALLOW COPY]──────────────────────────────────────");
+    System.out.println(album_shallowCopy.stringify());
+    assertSame(album.getTracklist().get(0).getAuthor(), album_shallowCopy.getTracklist().get(0).getAuthor());
+  }
+
+  @Test
+  public void album_deepCopyTest() throws CloneNotSupportedException {
+    dm.testHeader("Zad2. Deep Copy Test");
+
+    Album album_deepCopy = (Album) am.getAlbum(album.getTag()).DeepCopy();
+    album.getTracklist().get(0).getAuthor().setFirstName("Flobby");
+    System.out.print("───[ORYGINAŁ]──────────────────────────────────────────");
+    System.out.println(album.stringify());
+    System.out.print("───[DEEP COPY]─────────────────────────────────────────");
+    System.out.println(album_deepCopy.stringify());
+    assertNotEquals(album.getTracklist().get(0).getAuthor(), album_deepCopy.getTracklist().get(0).getAuthor());
+    assertNotSame(album.getTracklist().get(0).getAuthor(), album_deepCopy.getTracklist().get(0).getAuthor());
   }
 }
