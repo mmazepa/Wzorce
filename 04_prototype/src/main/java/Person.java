@@ -16,7 +16,7 @@ class Person {
   }
 
   void setFirstName(String firstName) {
-    System.out.println("Zmieniam imię z \"" + this.firstName + "\" na \"" + firstName + "\".");
+    System.out.println("=> Zmieniam imię z \"" + this.firstName + "\" na \"" + firstName + "\".");
     this.firstName = firstName;
   }
 
@@ -25,7 +25,7 @@ class Person {
   }
 
   void setLastName(String lastName) {
-    System.out.println("Zmieniam nazwisko z \"" + this.lastName + "\" na \"" + lastName + "\".");
+    System.out.println("=> Zmieniam nazwisko z \"" + this.lastName + "\" na \"" + lastName + "\".");
     this.lastName = lastName;
   }
 

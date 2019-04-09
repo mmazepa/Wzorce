@@ -40,19 +40,19 @@ class Song extends SongPrototype implements Cloneable {
     return minutes + ":" + seconds;
   }
 
-  public String stringify() {
+  public String toString() {
     return this.author.toString() + ", \"" + this.title + "\", " + this.prepareDuration() + ", " + this.year;
   }
 
   @Override
   public SongPrototype ShallowCopy() throws CloneNotSupportedException {
-    System.out.println("[SHALLOW COPYING]: " + this.stringify());
+    System.out.println("[SHALLOW COPYING]: " + this.toString());
     return (SongPrototype) this.clone();
   }
 
   @Override
   public SongPrototype DeepCopy() throws CloneNotSupportedException {
-    System.out.println("[DEEP COPYING]: " + this.stringify());
+    System.out.println("[DEEP COPYING]: " + this.toString());
     return (SongPrototype) new Song(this);
   }
 }

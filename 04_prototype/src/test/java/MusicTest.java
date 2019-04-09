@@ -40,14 +40,14 @@ public class MusicTest {
   @BeforeClass
   public static void setUpClass() {
     dm.mainHeader();
-    System.out.println("Rozpoczęcie testowania...");
-    // System.out.println("───────────────────────────────────────────────────────");
+    dm.printColored("Rozpoczęcie testowania...", dm.PURPLE);
   }
 
   @AfterClass
   public static void tearDownClass() {
-    System.out.println("───────────────────────────────────────────────────────");
-    System.out.println("Testowanie zakończone.");
+    dm.horizontalLine(55);
+    dm.printColored("Testowanie zakończone.", dm.PURPLE);
+    System.out.print("\n");
   }
 
   @Before
@@ -78,12 +78,12 @@ public class MusicTest {
     musicStore = new MusicStore(musicStoreTag, musicStoreName, albums);
     msm.setMusicStore(musicStoreTag, musicStore);
 
-    System.out.println("───────────────────────────────────────────────────────");
+    dm.horizontalLine(55);
   }
 
   @After
   public void tearDown() {
-    // System.out.println("───────────────────────────────────────────────────────");
+    // dm.horizontalLine(55);
   }
 
   @Test
@@ -138,12 +138,12 @@ public class MusicTest {
     MusicStore musicStore_shallowCopy = (MusicStore) msm.getMusicStore(musicStore.getTag()).ShallowCopy();
     musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor().setFirstName("Flobby");
     System.out.print("───[ORYGINAŁ]──────────────────────────────────────────");
-    System.out.println(musicStore.stringify());
+    dm.printColored(musicStore.toString(), dm.RED);
     System.out.print("───[SHALLOW COPY]──────────────────────────────────────");
-    System.out.println(musicStore_shallowCopy.stringify());
+    dm.printColored(musicStore_shallowCopy.toString(), dm.RED);
 
-    String original = musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor();
-    String deepCopy = musicStore_shallowCopy.getAlbums().get(0).getTracklist().get(0).getAuthor();
+    Person original = musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor();
+    Person shallowCopy = musicStore_shallowCopy.getAlbums().get(0).getTracklist().get(0).getAuthor();
     assertSame(original, shallowCopy);
   }
 
@@ -154,12 +154,12 @@ public class MusicTest {
     MusicStore musicStore_deepCopy = (MusicStore) msm.getMusicStore(musicStore.getTag()).DeepCopy();
     musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor().setFirstName("Flobby");
     System.out.print("───[ORYGINAŁ]──────────────────────────────────────────");
-    System.out.println(musicStore.stringify());
-    System.out.print("───[DEEP COPY]──────────────────────────────────────");
-    System.out.println(musicStore_deepCopy.stringify());
+    dm.printColored(musicStore.toString(), dm.WHITE);
+    System.out.print("───[DEEP COPY]─────────────────────────────────────────");
+    dm.printColored(musicStore_deepCopy.toString(), dm.WHITE);
 
-    String original = musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor();
-    String deepCopy = musicStore_deepCopy.getAlbums().get(0).getTracklist().get(0).getAuthor();
+    Person original = musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor();
+    Person deepCopy = musicStore_deepCopy.getAlbums().get(0).getTracklist().get(0).getAuthor();
     assertNotEquals(original, deepCopy);
     assertNotSame(original, deepCopy);
   }

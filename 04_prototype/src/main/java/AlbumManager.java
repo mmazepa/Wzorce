@@ -22,8 +22,8 @@ class AlbumManager {
     String original = "   [Oryginał]: ";
     typeOfCopy = "   [" + typeOfCopy + "Copy]: ";
     while (original.length() < typeOfCopy.length()) original += " ";
-    System.out.println(original + originalAlbum.stringify());
-    System.out.println(typeOfCopy + clonedAlbum.stringify());
+    System.out.println(original + originalAlbum.toString());
+    System.out.println(typeOfCopy + clonedAlbum.toString());
   }
 
   public static Duration sumDurations(ArrayList<Song> tracklist) {

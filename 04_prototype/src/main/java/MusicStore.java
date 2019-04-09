@@ -32,25 +32,25 @@ class MusicStore extends MusicStorePrototype implements Cloneable {
     return albums;
   }
 
-  public String stringify() {
+  public String toString() {
     String generalInfo = "\n   MusicStore \"" + this.name + "\"\n";
     int albumsCounter = 0;
     generalInfo += "      LISTA ALBUMÓW:\n";
     for (Album album : albums) {
-      generalInfo += "      " + (albumsCounter+1) + ". " + album.stringify();
+      generalInfo += "      " + (albumsCounter+1) + ". " + album.toString();
     }
     return generalInfo;
   }
 
   @Override
   public MusicStorePrototype ShallowCopy() throws CloneNotSupportedException {
-    System.out.println("[SHALLOW COPYING]: " + this.stringify());
+    System.out.println("[SHALLOW COPYING]: " + this.toString());
     return (MusicStorePrototype) this.clone();
   }
 
   @Override
   public MusicStorePrototype DeepCopy() throws CloneNotSupportedException {
-    System.out.println("[DEEP COPYING]: " + this.stringify());
+    System.out.println("[DEEP COPYING]: " + this.toString());
     return (MusicStorePrototype) new MusicStore(this);
   }
 }

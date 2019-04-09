@@ -21,7 +21,7 @@ class MusicStoreManager {
     String original = "   [Oryginał]: ";
     typeOfCopy = "   [" + typeOfCopy + "Copy]: ";
     while (original.length() < typeOfCopy.length()) original += " ";
-    System.out.println(original + originalMusicStore.stringify());
-    System.out.println(typeOfCopy + clonedMusicStore.stringify());
+    System.out.println(original + originalMusicStore.toString());
+    System.out.println(typeOfCopy + clonedMusicStore.toString());
   }
 }

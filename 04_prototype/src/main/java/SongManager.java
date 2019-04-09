@@ -17,10 +17,17 @@ class SongManager {
   }
 
   public static void displayBoth(String typeOfCopy, Song originalSong, Song clonedSong) {
+    DisplayManager dm = new DisplayManager();
+
+    String color = new String();
+    if (typeOfCopy.equals("Shallow")) color = dm.RED;
+    else if (typeOfCopy.equals("Deep")) color = dm.WHITE;
+
     String original = "   [Oryginał]: ";
     typeOfCopy = "   [" + typeOfCopy + "Copy]: ";
     while (original.length() < typeOfCopy.length()) original += " ";
-    System.out.println(original + originalSong.stringify());
-    System.out.println(typeOfCopy + clonedSong.stringify());
+
+    dm.printColored(original + originalSong.toString(), color);
+    dm.printColored(typeOfCopy + clonedSong.toString(), color);
   }
 }

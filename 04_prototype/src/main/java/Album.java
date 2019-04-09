@@ -49,12 +49,12 @@ class Album extends AlbumPrototype implements Cloneable {
     return minutes + ":" + seconds;
   }
 
-  public String stringify() {
+  public String toString() {
     String generalInfo = "Album \"" + this.title + "\", " + this.prepareDuration() + ", " + this.year + "\n";
     int counter = 0;
     generalInfo += "         LISTA UTWORÓW:\n";
     for (Song song : tracklist) {
-      generalInfo += "            " + (counter+1) + ". " + song.stringify();
+      generalInfo += "            " + (counter+1) + ". " + song.toString();
       if (counter < tracklist.size() - 1) generalInfo += "\n";
       counter++;
     }
@@ -63,13 +63,13 @@ class Album extends AlbumPrototype implements Cloneable {
 
   @Override
   public AlbumPrototype ShallowCopy() throws CloneNotSupportedException {
-    System.out.println("[SHALLOW COPYING]: " + this.stringify());
+    System.out.println("[SHALLOW COPYING]: " + this.toString());
     return (AlbumPrototype) this.clone();
   }
 
   @Override
   public AlbumPrototype DeepCopy() throws CloneNotSupportedException {
-    System.out.println("[DEEP COPYING]: " + this.stringify());
+    System.out.println("[DEEP COPYING]: " + this.toString());
     return (AlbumPrototype) new Album(this);
   }
 }
