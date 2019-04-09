@@ -141,20 +141,26 @@ public class MusicTest {
     System.out.println(musicStore.stringify());
     System.out.print("───[SHALLOW COPY]──────────────────────────────────────");
     System.out.println(musicStore_shallowCopy.stringify());
-    assertSame(musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor(), musicStore_shallowCopy.getAlbums().get(0).getTracklist().get(0).getAuthor());
+
+    String original = musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor();
+    String deepCopy = musicStore_shallowCopy.getAlbums().get(0).getTracklist().get(0).getAuthor();
+    assertSame(original, shallowCopy);
   }
 
   @Test
   public void musicStore_deepCopyTest() throws CloneNotSupportedException {
     dm.testHeader("Zad2. (MusicStore) Deep Copy Test");
 
-    MusicStore musicStore_shallowCopy = (MusicStore) msm.getMusicStore(musicStore.getTag()).ShallowCopy();
+    MusicStore musicStore_deepCopy = (MusicStore) msm.getMusicStore(musicStore.getTag()).DeepCopy();
     musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor().setFirstName("Flobby");
     System.out.print("───[ORYGINAŁ]──────────────────────────────────────────");
     System.out.println(musicStore.stringify());
-    System.out.print("───[SHALLOW COPY]──────────────────────────────────────");
-    System.out.println(musicStore_shallowCopy.stringify());
-    // assertNotEquals(musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor(), musicStore_shallowCopy.getAlbums().get(0).getTracklist().get(0).getAuthor());
-    // assertNotSame(musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor(), musicStore_shallowCopy.getAlbums().get(0).getTracklist().get(0).getAuthor());
+    System.out.print("───[DEEP COPY]──────────────────────────────────────");
+    System.out.println(musicStore_deepCopy.stringify());
+
+    String original = musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor();
+    String deepCopy = musicStore_deepCopy.getAlbums().get(0).getTracklist().get(0).getAuthor();
+    assertNotEquals(original, deepCopy);
+    assertNotSame(original, deepCopy);
   }
 }
