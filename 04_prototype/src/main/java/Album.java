@@ -50,11 +50,11 @@ class Album extends AlbumPrototype implements Cloneable {
   }
 
   public String stringify() {
-    String generalInfo = "\n     Album \"" + this.title + "\", " + this.prepareDuration() + ", " + this.year + "\n";
+    String generalInfo = "Album \"" + this.title + "\", " + this.prepareDuration() + ", " + this.year + "\n";
     int counter = 0;
-    generalInfo += "     LISTA UTWORÓW:\n";
+    generalInfo += "         LISTA UTWORÓW:\n";
     for (Song song : tracklist) {
-      generalInfo += "          " + (counter+1) + ". " + song.stringify();
+      generalInfo += "            " + (counter+1) + ". " + song.stringify();
       if (counter < tracklist.size() - 1) generalInfo += "\n";
       counter++;
     }
