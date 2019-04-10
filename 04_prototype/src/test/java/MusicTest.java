@@ -93,17 +93,20 @@ public class MusicTest {
     Song song1_shallowCopy = (Song) sm.getSong(song1.getTag()).ShallowCopy();
     song1.getAuthor().setFirstName("Robert");
     sm.displayBoth("Shallow", song1, song1_shallowCopy);
+    assertEquals(song1.getAuthor(), song1_shallowCopy.getAuthor());
     assertSame(song1.getAuthor(), song1_shallowCopy.getAuthor());
 
     Song song2_shallowCopy = (Song) sm.getSong(song2.getTag()).ShallowCopy();
     song2.getAuthor().setLastName("Młody");
     sm.displayBoth("Shallow", song2, song2_shallowCopy);
+    assertEquals(song2.getAuthor(), song2_shallowCopy.getAuthor());
     assertSame(song2.getAuthor(), song2_shallowCopy.getAuthor());
 
     Song song3_shallowCopy = (Song) sm.getSong(song3.getTag()).ShallowCopy();
     song3.getAuthor().setFirstName("Michael");
     song3.getAuthor().setLastName("Deer");
     sm.displayBoth("Shallow", song3, song3_shallowCopy);
+    assertEquals(song3.getAuthor(), song3_shallowCopy.getAuthor());
     assertSame(song3.getAuthor(), song3_shallowCopy.getAuthor());
   }
 
@@ -144,6 +147,7 @@ public class MusicTest {
 
     Person original = musicStore.getAlbums().get(0).getTracklist().get(0).getAuthor();
     Person shallowCopy = musicStore_shallowCopy.getAlbums().get(0).getTracklist().get(0).getAuthor();
+    assertEquals(original, shallowCopy);
     assertSame(original, shallowCopy);
   }
 
