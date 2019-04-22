@@ -1,9 +1,8 @@
 class Workshop {
-  public void construct(ProductBuilder productBuilder) {
-    productBuilder.BuildPart1();
-    productBuilder.BuildPart2();
-    productBuilder.BuildPart3();
-    productBuilder.BuildPart4();
-    productBuilder.BuildPart5();
+  // public Product construct(Builder builder) {
+  public void construct(Builder builder) {
+    System.out.println("Trwa budowanie produktu...");
+    builder.buildPart1().buildPart2().buildPart3().buildPart4().buildPart5();
+    // return builder;
   }
 }

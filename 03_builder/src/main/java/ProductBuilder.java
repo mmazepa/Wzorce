@@ -1,21 +1,35 @@
-abstract class ProductBuilder extends Builder {
-  public void BuildPart1() {
-    System.out.println("Part1 built...");
+class ProductBuilder extends Builder {
+  public ProductBuilder() {
+    product = new Product("Produkt");
+  }
+
+  public ProductBuilder buildPart1() {
+    System.out.println("Part1 zbudowana...");
+    product.setPart("part1", "część nr 1");
+    return this;
   };
 
-  public void BuildPart2() {
-    System.out.println("Part2 built...");
+  public ProductBuilder buildPart2() {
+    System.out.println("Part2 zbudowana...");
+    product.setPart("part2", "część nr 2");
+    return this;
   };
 
-  public void BuildPart3() {
-    System.out.println("Part3 built...");
+  public ProductBuilder buildPart3() {
+    System.out.println("Part3 zbudowana...");
+    product.setPart("part3", "część nr 3");
+    return this;
   };
 
-  public void BuildPart4() {
-    System.out.println("Part4 built...");
+  public ProductBuilder buildPart4() {
+    System.out.println("Part4 zbudowana...");
+    product.setPart("part4", "część nr 4");
+    return this;
   };
 
-  public void BuildPart5() {
-    System.out.println("Part5 built...");
+  public ProductBuilder buildPart5() {
+    System.out.println("Part5 zbudowana...");
+    product.setPart("part5", "część nr 5");
+    return this;
   };
 }

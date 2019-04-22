@@ -1,6 +1,10 @@
 public class BuilderManager {
   public static void mainHeader() {
-    System.out.println("BUILDER TEST !!!");
+    System.out.println(" _____     _ _   _            _____         _   ");
+    System.out.println("| __  |_ _|_| |_| |___ ___   |_   _|___ ___| |_ ");
+    System.out.println("| __ -| | | | | . | -_|  _|    | | | -_|_ -|  _|");
+    System.out.println("|_____|___|_|_|___|___|_|      |_| |___|___|_|  ");
+    System.out.print("\n");
   }
 
   public static String howManyFrames(String frame, int times) {

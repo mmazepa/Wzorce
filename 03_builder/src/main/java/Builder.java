@@ -1,11 +1,21 @@
 abstract class Builder {
   protected Product product;
 
-  public Product GetProduct() { return product; }
+  public Product getProduct() { return product; }
 
-  public abstract void BuildPart1();
-  public abstract void BuildPart2();
-  public abstract void BuildPart3();
-  public abstract void BuildPart4();
-  public abstract void BuildPart5();
+  public abstract ProductBuilder buildPart1();
+  public abstract ProductBuilder buildPart2();
+  public abstract ProductBuilder buildPart3();
+  public abstract ProductBuilder buildPart4();
+  public abstract ProductBuilder buildPart5();
+
+  // public static final Product Product(final Builder builder) {
+  //   return builder
+  //     .buildPart1()
+  //     .buildPart2()
+  //     .buildPart3()
+  //     .buildPart4()
+  //     .buildPart5()
+  //     .product;
+  // }
 }

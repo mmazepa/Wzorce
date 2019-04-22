@@ -4,15 +4,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.hamcrest.CoreMatchers.*;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
+import static org.hamcrest.CoreMatchers.*;;
 
 public class BuilderTest {
 
@@ -22,29 +14,34 @@ public class BuilderTest {
   public static void setUpClass() {
     bm.mainHeader();
     System.out.println("Rozpoczęcie testowania...");
-    System.out.println("-------------------------------------------------------");
+    System.out.println("───────────────────────────────────────────────────────");
   }
 
   @AfterClass
   public static void tearDownClass() {
-    // System.out.println("-------------------------------------------------------");
-    System.out.println("Testowanie zakończone.");
+    // System.out.println("───────────────────────────────────────────────────────");
+    System.out.println("Testowanie zakończone.\n");
   }
 
   @Before
   public void setUp() {
-    // System.out.println("-------------------------------------------------------");
+    // System.out.println("───────────────────────────────────────────────────────");
   }
 
   @After
   public void tearDown() {
-    System.out.println("-------------------------------------------------------");
+    System.out.println("───────────────────────────────────────────────────────");
   }
 
   @Test
   public void simpleBuilderTest() {
     bm.testHeader("Simple Builder Test");
 
-    //...
+    Builder builder;
+    Workshop workshop = new Workshop();
+
+    builder = new ProductBuilder();
+    workshop.construct(builder);
+    builder.getProduct().show();
   }
 }

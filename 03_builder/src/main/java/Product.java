@@ -1,24 +1,30 @@
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
 
 class Product {
   private String productType;
-  private String part1;
-  private String part2;
-  private String part3;
-  private String part4;
-  private String part5;
+  private Map<String, String> parts = new HashMap<String, String>();
 
   public Product(String productType) {
     this.productType = productType;
   }
 
-  public void Show() {
-    System.out.println("\n---------------------------");
-    System.out.println("Product Type: " + productType);
-    System.out.println("  Part1: " + part1);
-    System.out.println("  Part2: " + part2);
-    System.out.println("  Part3: " + part3);
-    System.out.println("  Part4: " + part4);
-    System.out.println("  Part5: " + part5);
+  public void setPart(String partKey, String partValue) {
+    parts.put(partKey, partValue);
+  }
+
+  public void displayAllParts() {
+    Iterator it = parts.entrySet().iterator();
+    while (it.hasNext()) {
+        Map.Entry pair = (Map.Entry)it.next();
+        System.out.println("   " + pair.getKey() + ": " + pair.getValue());
+    }
+  }
+
+  public void show() {
+    System.out.println("---------------------------");
+    System.out.println("Typ produktu: " + productType);
+    displayAllParts();
   }
 }
