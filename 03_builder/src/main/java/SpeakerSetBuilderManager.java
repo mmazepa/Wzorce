@@ -1,4 +1,4 @@
-public class BuilderManager {
+public class SpeakerSetBuilderManager {
   public static void mainHeader() {
     System.out.println(" _____     _ _   _            _____         _   ");
     System.out.println("| __  |_ _|_| |_| |___ ___   |_   _|___ ___| |_ ");

@@ -2,12 +2,12 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
 
-class Product {
-  private String productType;
+class SpeakerSet {
+  private String speakerSetType;
   private Map<String, String> parts = new HashMap<String, String>();
 
-  public Product(String productType) {
-    this.productType = productType;
+  public SpeakerSet(String speakerSetType) {
+    this.speakerSetType = speakerSetType;
   }
 
   public void setPart(String partKey, String partValue) {
@@ -23,8 +23,8 @@ class Product {
   }
 
   public void show() {
-    System.out.println("---------------------------");
-    System.out.println("Typ produktu: " + productType);
+    // System.out.println("---------------------------");
+    System.out.println("Typ zestawu: " + speakerSetType);
     displayAllParts();
   }
 }

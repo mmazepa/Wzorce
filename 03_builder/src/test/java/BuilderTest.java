@@ -8,11 +8,11 @@ import static org.hamcrest.CoreMatchers.*;;
 
 public class BuilderTest {
 
-  static BuilderManager bm = new BuilderManager();
+  static SpeakerSetBuilderManager ssbm = new SpeakerSetBuilderManager();
 
   @BeforeClass
   public static void setUpClass() {
-    bm.mainHeader();
+    ssbm.mainHeader();
     System.out.println("Rozpoczęcie testowania...");
     System.out.println("───────────────────────────────────────────────────────");
   }
@@ -35,13 +35,21 @@ public class BuilderTest {
 
   @Test
   public void simpleBuilderTest() {
-    bm.testHeader("Simple Builder Test");
+    ssbm.testHeader("Simple Builder Test");
 
-    Builder builder;
-    Workshop workshop = new Workshop();
+    SpeakerSetBuilder builder;
+    Shop shop = new Shop();
 
-    builder = new ProductBuilder();
-    workshop.construct(builder);
-    builder.getProduct().show();
+    builder = new SmallSetBuilder();
+    shop.construct(builder);
+    builder.getSpeakerSet().show();
+
+    builder = new MediumSetBuilder();
+    shop.construct(builder);
+    builder.getSpeakerSet().show();
+
+    builder = new LargeSetBuilder();
+    shop.construct(builder);
+    builder.getSpeakerSet().show();
   }
 }
