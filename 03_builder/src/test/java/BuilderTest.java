@@ -40,16 +40,13 @@ public class BuilderTest {
     SpeakerSetBuilder builder;
     Shop shop = new Shop();
 
-    builder = new SmallSetBuilder();
-    shop.construct(builder);
-    builder.getSpeakerSet().show();
+    SpeakerSet small = shop.construct(new SmallSetBuilder());
+    small.show();
 
-    builder = new MediumSetBuilder();
-    shop.construct(builder);
-    builder.getSpeakerSet().show();
+    SpeakerSet medium = shop.construct(new MediumSetBuilder());
+    medium.show();
 
-    builder = new LargeSetBuilder();
-    shop.construct(builder);
-    builder.getSpeakerSet().show();
+    SpeakerSet large = shop.construct(new LargeSetBuilder());
+    large.show();
   }
 }

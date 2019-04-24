@@ -23,7 +23,6 @@ class SpeakerSet {
   }
 
   public void show() {
-    // System.out.println("---------------------------");
     System.out.println("Typ zestawu: " + speakerSetType);
     displayAllParts();
   }

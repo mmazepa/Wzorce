@@ -3,21 +3,25 @@ class SmallSetBuilder extends SpeakerSetBuilder {
     speakerSet = new SpeakerSet("Głośniki 2.0");
   }
 
+  @Override
   public SmallSetBuilder buildMembranes() {
     speakerSet.setPart("Membrany", "2");
     return this;
   };
 
-  public SmallSetBuilder buildSpeakers() {
-    speakerSet.setPart("Głośniki", "2");
-    return this;
-  };
-
+  @Override
   public SmallSetBuilder buildAmplifier() {
     speakerSet.setPart("Wzmacniacz", "14W");
     return this;
   };
 
+  @Override
+  public SmallSetBuilder buildSpeakers() {
+    speakerSet.setPart("Głośniki", "2");
+    return this;
+  };
+
+  @Override
   public SmallSetBuilder paintSpeakerSet() {
     speakerSet.setPart("Kolor", "biały");
     return this;

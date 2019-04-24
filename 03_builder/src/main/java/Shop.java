@@ -1,10 +1,13 @@
 class Shop {
-  // public Product construct(Builder builder) {
-  public void construct(SpeakerSetBuilder builder) {
-    System.out.println("------------------------------------------------------");
-    System.out.println("Trwa budowanie produktu...");
-    System.out.println("------------------------------------------------------");
-    builder.buildMembranes().buildSpeakers().buildAmplifier().paintSpeakerSet();
-    // return builder;
+  SpeakerSetBuilderManager ssbm = new SpeakerSetBuilderManager();
+
+  public SpeakerSet construct(SpeakerSetBuilder builder) {
+    ssbm.printWithLineAbove("Trwa budowanie zestawu głośników...");
+    return builder
+      .buildMembranes()
+      .buildAmplifier()
+      .buildSpeakers()
+      .paintSpeakerSet()
+      .getSpeakerSet();
   }
 }
