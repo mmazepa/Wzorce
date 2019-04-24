@@ -3,11 +3,6 @@ class Shop {
 
   public SpeakerSet construct(SpeakerSetBuilder builder) {
     ssbm.printWithLineAbove("Trwa budowanie zestawu głośników...");
-    return builder
-      .buildMembranes()
-      .buildAmplifier()
-      .buildSpeakers()
-      .paintSpeakerSet()
-      .getSpeakerSet();
+    return SpeakerSetBuilder.getSpeakerSet(builder);
   }
 }
