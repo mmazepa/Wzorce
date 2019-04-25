@@ -94,10 +94,8 @@ public class FactoryTest {
       String wantedJuice = entry.getKey();
       Class expectedClass = entry.getValue();
 
-      System.out.println("1) ZAMÓWIENIE: " + expectedClass);
       Juice juice = factory.makeJuice(wantedJuice);
-      juice.prepare();
-      System.out.println("2) ODBIÓR:     " + juice.getClass());
+      System.out.println("ZAMÓWIENIE/ODBIÓR: " + expectedClass + "/" + juice.getClass());
       assertThat(juice, instanceOf(expectedClass));
     }
   }
@@ -125,7 +123,6 @@ public class FactoryTest {
     factory = new EnglishFactory();
     Juice juice5 = factory.makeJuice("pomegranate");
     System.out.println(juice5.getClass());
-
 
     assertThat(juice1, instanceOf(OrangeJuice.class));
     assertThat(juice2, instanceOf(StrawberryJuice.class));
