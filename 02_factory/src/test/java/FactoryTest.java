@@ -249,13 +249,13 @@ public class FactoryTest {
   public void abstractFactoryTest() {
     fm.testHeader("Abstract Factory Test");
 
-    Computer computer;
+    PreparedBottle preparedBottle;
     for (int i = 0; i < 5; i++) {
-      String pcName = "PC-" + (i+1);
+      String bottleName = "Bottle-" + (i+1);
       if (i%2 == 0)
-        computer = new Computer(pcName, new AMDFactory());
+        preparedBottle = new PreparedBottle(bottleName, new LagerFactory());
       else
-        computer = new Computer(pcName, new IntelFactory());
+        preparedBottle = new PreparedBottle(bottleName, new PorterFactory());
     }
   }
 }

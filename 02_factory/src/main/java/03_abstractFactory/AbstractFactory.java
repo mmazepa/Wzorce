@@ -1,86 +1,79 @@
-interface Processor {
-  void process();
-}
+interface Bottle { void process(); }
+interface Sticker { void process(); }
 
-class AMDProcessor implements Processor {
+class LagerBottle implements Bottle {
   @Override
   public void process() {
-    System.out.println("Montuję procesor AMD...");
+    System.out.println("   Wybieram butelkę od Lagera...");
   }
 }
 
-class IntelProcessor implements Processor {
+class LagerSticker implements Sticker {
   @Override
   public void process() {
-    System.out.println("Montuję procesor Intel...");
+    System.out.println("   Naklejam naklejkę Lagera...");
   }
 }
 
-interface Cooler {
-  void process();
-}
-
-class AMDCooler implements Cooler {
+class PorterBottle implements Bottle {
   @Override
   public void process() {
-    System.out.println("Montuję wiatraczek AMD...");
+    System.out.println("   Wybieram butelkę od Portera...");
   }
 }
 
-class IntelCooler implements Cooler {
+class PorterSticker implements Sticker {
   @Override
   public void process() {
-    System.out.println("Montuję wiatraczek Intel...");
+    System.out.println("   Naklejam naklejkę Portera...");
   }
 }
 
-interface ProcessorFactory {
-  public Processor createProcessor();
-  public Cooler createCooler();
+interface BottleFactory {
+  public Bottle createBottle();
+  public Sticker createSticker();
 }
 
-class AMDFactory implements ProcessorFactory {
-
+class LagerFactory implements BottleFactory {
   @Override
-  public Processor createProcessor() {
-    return new AMDProcessor();
+  public Bottle createBottle() {
+    return new LagerBottle();
   }
 
   @Override
-  public Cooler createCooler() {
-    return new AMDCooler();
-  }
-}
-
-class IntelFactory implements ProcessorFactory {
-
-  @Override
-  public Processor createProcessor() {
-    return new IntelProcessor();
-  }
-
-  @Override
-  public Cooler createCooler() {
-    return new IntelCooler();
+  public Sticker createSticker() {
+    return new LagerSticker();
   }
 }
 
-class Computer {
+class PorterFactory implements BottleFactory {
+  @Override
+  public Bottle createBottle() {
+    return new PorterBottle();
+  }
+
+  @Override
+  public Sticker createSticker() {
+    return new PorterSticker();
+  }
+}
+
+class PreparedBottle {
   private String serialNumber;
-  private Processor processor;
-  private Cooler cooler;
+  private Bottle bottle;
+  private Sticker sticker;
 
-  public Computer(String serialNumber, ProcessorFactory factory) {
+  public PreparedBottle(String serialNumber, BottleFactory factory) {
     this.serialNumber = serialNumber;
-    processor = factory.createProcessor();
-    cooler = factory.createCooler();
+    bottle = factory.createBottle();
+    sticker = factory.createSticker();
     process();
   }
 
   private void process() {
-    System.out.println("Rozpoczynam składanie komputera [" + serialNumber + "].");
-    processor.process();
-    cooler.process();
-    System.out.println("Zakończyłem składanie komputera [" + serialNumber + "].");
+    System.out.println("Rozpoczynam tworzenie butelki [" + serialNumber + "].");
+    bottle.process();
+    sticker.process();
+    System.out.println("Zakończyłem tworzenie butelki [" + serialNumber + "].");
   }
 }
