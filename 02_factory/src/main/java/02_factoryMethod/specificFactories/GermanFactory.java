@@ -1,4 +1,15 @@
 class GermanFactory extends FactoryMethod {
+  public FactoryMethod getInstance() {
+    if (factory == null) {
+      synchronized(FactoryMethod.class) {
+        if (factory == null) {
+          factory = new GermanFactory();
+        }
+      }
+    }
+    return factory;
+  }
+
   protected Juice makeJuice(String type) {
     if (type.equals("orange")) return new OrangeJuice();
     else if (type.equals("strawberry")) return new StrawberryJuice();

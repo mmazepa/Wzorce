@@ -67,7 +67,7 @@ class PreparedBottle {
     this.serialNumber = serialNumber;
     bottle = factory.createBottle();
     sticker = factory.createSticker();
-    process();
+    // process();
   }
 
   private void process() {

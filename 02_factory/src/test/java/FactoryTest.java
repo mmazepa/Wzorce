@@ -10,6 +10,8 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.HashMap;
 
+import java.util.concurrent.TimeUnit;
+
 public class FactoryTest {
 
   static FactoryManager fm = new FactoryManager();
@@ -22,32 +24,45 @@ public class FactoryTest {
   public static void setUpClass() {
     fm.mainHeader();
     System.out.println("Rozpoczęcie testowania...");
-    System.out.println("-------------------------------------------------------");
-    // System.out.println("Czyszczenie pamięci, instancja ustawiona na 'null'.");
-    // resetFactory(SimpleFactory.class, "factory");
+    System.out.println("───────────────────────────────────────────────────────");
+
+    System.out.println("Przygotowanie piw...");
+    beers.put("lager", LagerBeer.class);
+    beers.put("pilzner", PilznerBeer.class);
+    beers.put("porter", PorterBeer.class);
+    beers.put("stout", StoutBeer.class);
+    beers.put("wheat", WheatBeer.class);
+
     System.out.println("Przygotowanie soków...");
     juices.put("orange", OrangeJuice.class);
     juices.put("kiwi", KiwiJuice.class);
     juices.put("mango", MangoJuice.class);
     juices.put("pomegranate", PomegranateJuice.class);
     juices.put("strawberry", StrawberryJuice.class);
+
+    System.out.println("Przygotowanie herbat...");
+    teas.put("black", BlackTea.class);
+    teas.put("green", GreenTea.class);
+    teas.put("red", RedTea.class);
+    teas.put("white", WhiteTea.class);
+    teas.put("yellow", YellowTea.class);
   }
 
   @AfterClass
   public static void tearDownClass() {
-    System.out.println("-------------------------------------------------------");
-    System.out.println("Testowanie zakończone.");
+    System.out.println("───────────────────────────────────────────────────────");
+    System.out.println("Testowanie zakończone.\n");
   }
 
   @Before
   public void setUp() {
-    System.out.println("-------------------------------------------------------");
+    System.out.println("───────────────────────────────────────────────────────");
   }
 
   @After
   public void tearDown() {
-    System.out.println("-------------------------------------------------------");
-    System.out.println("Czyszczenie pamięci, instancja ustawiona na 'null'.");
+    // System.out.println("───────────────────────────────────────────────────────");
+    // System.out.println("Czyszczenie pamięci, instancja ustawiona na 'null'.");
     resetFactory(SimpleFactory.class, "factory");
   }
 
@@ -60,28 +75,6 @@ public class FactoryTest {
     } catch (Exception e) {
       throw new RuntimeException();
     }
-  }
-
-  //@Test
-  public void simpleSimpleFactorySingletonTest() {
-    fm.testHeader("SimpleFactory Singleton Test");
-
-    SimpleFactory factory1 = SimpleFactory.getInstance();
-    SimpleFactory factory2 = SimpleFactory.getInstance();
-
-    assertThat(factory2.hashCode(), equalTo(factory1.hashCode()));
-    fm.displayHashCodes(factory1, factory2);
-  }
-
-  //@Test
-  public void simpleFactoryMethodSingletonTest() {
-    fm.testHeader("FactoryMethod Singleton Test");
-
-    FactoryMethod factory1 = FactoryMethod.getInstance();
-    FactoryMethod factory2 = FactoryMethod.getInstance();
-
-    assertThat(factory2.hashCode(), equalTo(factory1.hashCode()));
-    fm.displayHashCodes(factory1, factory2);
   }
 
   @Test
@@ -137,23 +130,14 @@ public class FactoryTest {
 
     SimpleFactory factory = SimpleFactory.getInstance();
 
-    Beer beer1 = factory.makeBeer("lager");
-    Beer beer2 = factory.makeBeer("wheat");
-    Beer beer3 = factory.makeBeer("pilzner");
-    Beer beer4 = factory.makeBeer("porter");
-    Beer beer5 = factory.makeBeer("stout");
+    for (Map.Entry<String, Class> entry : beers.entrySet()) {
+      String wantedBeer = entry.getKey();
+      Class expectedClass = entry.getValue();
 
-    System.out.println(beer1.getClass());
-    System.out.println(beer2.getClass());
-    System.out.println(beer3.getClass());
-    System.out.println(beer4.getClass());
-    System.out.println(beer5.getClass());
-
-    assertThat(beer1, instanceOf(LagerBeer.class));
-    assertThat(beer2, instanceOf(WheatBeer.class));
-    assertThat(beer3, instanceOf(PilznerBeer.class));
-    assertThat(beer4, instanceOf(PorterBeer.class));
-    assertThat(beer5, instanceOf(StoutBeer.class));
+      Beer beer = factory.makeBeer(wantedBeer);
+      System.out.println("ZAMÓWIENIE/ODBIÓR: " + expectedClass + "/" + beer.getClass());
+      assertThat(beer, instanceOf(expectedClass));
+    }
   }
 
   @Test
@@ -194,23 +178,14 @@ public class FactoryTest {
 
     SimpleFactory factory = SimpleFactory.getInstance();
 
-    Tea tea1 = factory.makeTea("black");
-    Tea tea2 = factory.makeTea("green");
-    Tea tea3 = factory.makeTea("red");
-    Tea tea4 = factory.makeTea("white");
-    Tea tea5 = factory.makeTea("yellow");
+    for (Map.Entry<String, Class> entry : teas.entrySet()) {
+      String wantedTea = entry.getKey();
+      Class expectedClass = entry.getValue();
 
-    System.out.println(tea1.getClass());
-    System.out.println(tea2.getClass());
-    System.out.println(tea3.getClass());
-    System.out.println(tea4.getClass());
-    System.out.println(tea5.getClass());
-
-    assertThat(tea1, instanceOf(BlackTea.class));
-    assertThat(tea2, instanceOf(GreenTea.class));
-    assertThat(tea3, instanceOf(RedTea.class));
-    assertThat(tea4, instanceOf(WhiteTea.class));
-    assertThat(tea5, instanceOf(YellowTea.class));
+      Tea tea = factory.makeTea(wantedTea);
+      System.out.println("ZAMÓWIENIE/ODBIÓR: " + expectedClass + "/" + tea.getClass());
+      assertThat(tea, instanceOf(expectedClass));
+    }
   }
 
   @Test
@@ -257,5 +232,45 @@ public class FactoryTest {
       else
         preparedBottle = new PreparedBottle(bottleName, new PorterFactory());
     }
+  }
+
+  @Test
+  public void timeTest() {
+    fm.testHeader("Factories Time Test");
+
+    long startTime, endTime, timeElapsed;
+    int limit = 1000000;
+
+    // ----- SIMPLE FACTORY TIME TEST ------------------------------------------
+	  startTime = System.currentTimeMillis();
+    for (int i = 0; i < limit; i++) {
+      SimpleFactory simpleFactory = SimpleFactory.getInstance();
+      Juice juice = simpleFactory.makeJuice("orange");
+    }
+    endTime = System.currentTimeMillis();
+    timeElapsed = endTime - startTime;
+    System.out.println("   SimpleFactory:   " + timeElapsed + " ms");
+
+    // ----- FACTORY METHOD TIME TEST ------------------------------------------
+    startTime = System.currentTimeMillis();
+    for (int i = 0; i < limit; i++) {
+      FactoryMethod factory;
+      factory = new PolishFactory();
+      Juice juice = factory.makeJuice("orange");
+    }
+    endTime = System.currentTimeMillis();
+    timeElapsed = endTime - startTime;
+    System.out.println("   FactoryMethod:   " + timeElapsed + " ms");
+
+    // ----- ABSTRACT FACTORY TIME TEST ----------------------------------------
+    startTime = System.currentTimeMillis();
+    for (int i = 0; i < limit; i++) {
+      PreparedBottle preparedBottle;
+      String bottleName = "Bottle-" + (i+1);
+      preparedBottle = new PreparedBottle(bottleName, new PorterFactory());
+    }
+    endTime = System.currentTimeMillis();
+    timeElapsed = endTime - startTime;
+    System.out.println("   AbstractFactory: " + timeElapsed + " ms");
   }
 }
