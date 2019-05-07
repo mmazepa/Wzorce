@@ -12,7 +12,7 @@ w roku akademickim 2018/2019.
     <th>Punkty</th>
   </tr>
   <tr>
-    <td rowspan="5">Zadania małe</td>
+    <td rowspan="5">Zadania małe (5)</td>
     <td>21.03.2019</td>
     <td>Singleton</td>
     <td>3.5/4 pkt</td>
@@ -46,10 +46,38 @@ w roku akademickim 2018/2019.
     <td>37.5%</td>
   </tr>
   <tr>
-    <td>Zadanie duże (projekt)</td>
-    <td>-</td>
-    <td>-</td>
-    <td>0/20 pkt</td>
+    <td rowspan="3">
+      Zadanie duże (projekt)<br/>
+      <br/>
+      <b>Tytuł:</b> "Biblioteka"
+    </td>
+    <td rowspan="3">-</td>
+    <td>
+      <b>Konstrukcyjne:</b></br>
+      <ul style="list-style-type:circle;">
+        <li>...</li>
+        <li>...</li>
+      </ul>
+    </td>
+    <td rowspan="3">0/20 pkt</td>
+  </tr>
+  <tr>
+    <td>
+      <b>Strukturalne:</b></br>
+      <ul style="list-style-type:circle;">
+        <li>...</li>
+        <li>...</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Czynnościowe:</b></br>
+      <ul style="list-style-type:circle;">
+        <li>...</li>
+        <li>...</li>
+      </ul>
+    </td>
   </tr>
   <tr>
     <td colspan="3" align="right"><b>SUMA (ogółem):</b></td>
