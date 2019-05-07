@@ -1,0 +1,3 @@
+public enum JuiceType {
+    KIWI, MANGO, ORANGE, POMEGRANATE, STRAWBERRY
+}

@@ -16,31 +16,55 @@ class SimpleFactory implements Serializable {
 		return factory;
 	}
 
-  public static Juice makeJuice(String type) {
-    if (type.equals("orange")) return new OrangeJuice();
-    else if (type.equals("strawberry")) return new StrawberryJuice();
-    else if (type.equals("kiwi")) return new KiwiJuice();
-    else if (type.equals("mango")) return new MangoJuice();
-    else if (type.equals("pomegranate")) return new PomegranateJuice();
-    else return null;
+  public static Juice makeJuice(JuiceType type) {
+    switch (type) {
+      case KIWI:
+        return new KiwiJuice();
+      case MANGO:
+        return new MangoJuice();
+      case ORANGE:
+        return new OrangeJuice();
+      case POMEGRANATE:
+        return new PomegranateJuice();
+      case STRAWBERRY:
+        return new StrawberryJuice();
+      default:
+        return null;
+    }
   }
 
-  public static Beer makeBeer(String type) {
-    if (type.equals("lager")) return new LagerBeer();
-    else if (type.equals("wheat")) return new WheatBeer();
-    else if (type.equals("pilzner")) return new PilznerBeer();
-    else if (type.equals("porter")) return new PorterBeer();
-    else if (type.equals("stout")) return new StoutBeer();
-    else return null;
+  public static Beer makeBeer(BeerType type) {
+    switch (type) {
+      case LAGER:
+        return new LagerBeer();
+      case PILZNER:
+        return new PilznerBeer();
+      case PORTER:
+        return new PorterBeer();
+      case STOUT:
+        return new StoutBeer();
+      case WHEAT:
+        return new WheatBeer();
+      default:
+        return null;
+    }
   }
 
-  public static Tea makeTea(String type) {
-    if (type.equals("black")) return new BlackTea();
-    else if (type.equals("green")) return new GreenTea();
-    else if (type.equals("red")) return new RedTea();
-    else if (type.equals("white")) return new WhiteTea();
-    else if (type.equals("yellow")) return new YellowTea();
-    return null;
+  public static Tea makeTea(TeaType type) {
+    switch (type) {
+      case BLACK:
+        return new BlackTea();
+      case GREEN:
+        return new GreenTea();
+      case RED:
+        return new RedTea();
+      case WHITE:
+        return new WhiteTea();
+      case YELLOW:
+        return new YellowTea();
+      default:
+        return null;
+    }
   }
 
   protected Object readResolve() {

@@ -16,9 +16,9 @@ public class FactoryTest {
 
   static FactoryManager fm = new FactoryManager();
 
-  static Map<String, Class> juices = new HashMap<String, Class>();
-  static Map<String, Class> beers = new HashMap<String, Class>();
-  static Map<String, Class> teas = new HashMap<String, Class>();
+  static Map<JuiceType, Class> juices = new HashMap<JuiceType, Class>();
+  static Map<BeerType, Class> beers = new HashMap<BeerType, Class>();
+  static Map<TeaType, Class> teas = new HashMap<TeaType, Class>();
 
   @BeforeClass
   public static void setUpClass() {
@@ -27,25 +27,25 @@ public class FactoryTest {
     System.out.println("───────────────────────────────────────────────────────");
 
     System.out.println("Przygotowanie piw...");
-    beers.put("lager", LagerBeer.class);
-    beers.put("pilzner", PilznerBeer.class);
-    beers.put("porter", PorterBeer.class);
-    beers.put("stout", StoutBeer.class);
-    beers.put("wheat", WheatBeer.class);
+    beers.put(BeerType.LAGER, LagerBeer.class);
+    beers.put(BeerType.PILZNER, PilznerBeer.class);
+    beers.put(BeerType.PORTER, PorterBeer.class);
+    beers.put(BeerType.STOUT, StoutBeer.class);
+    beers.put(BeerType.WHEAT, WheatBeer.class);
 
     System.out.println("Przygotowanie soków...");
-    juices.put("orange", OrangeJuice.class);
-    juices.put("kiwi", KiwiJuice.class);
-    juices.put("mango", MangoJuice.class);
-    juices.put("pomegranate", PomegranateJuice.class);
-    juices.put("strawberry", StrawberryJuice.class);
+    juices.put(JuiceType.KIWI, KiwiJuice.class);
+    juices.put(JuiceType.MANGO, MangoJuice.class);
+    juices.put(JuiceType.ORANGE, OrangeJuice.class);
+    juices.put(JuiceType.POMEGRANATE, PomegranateJuice.class);
+    juices.put(JuiceType.STRAWBERRY, StrawberryJuice.class);
 
     System.out.println("Przygotowanie herbat...");
-    teas.put("black", BlackTea.class);
-    teas.put("green", GreenTea.class);
-    teas.put("red", RedTea.class);
-    teas.put("white", WhiteTea.class);
-    teas.put("yellow", YellowTea.class);
+    teas.put(TeaType.BLACK, BlackTea.class);
+    teas.put(TeaType.GREEN, GreenTea.class);
+    teas.put(TeaType.RED, RedTea.class);
+    teas.put(TeaType.WHITE, WhiteTea.class);
+    teas.put(TeaType.YELLOW, YellowTea.class);
   }
 
   @AfterClass
@@ -62,7 +62,6 @@ public class FactoryTest {
   @After
   public void tearDown() {
     // System.out.println("───────────────────────────────────────────────────────");
-    // System.out.println("Czyszczenie pamięci, instancja ustawiona na 'null'.");
     resetFactory(SimpleFactory.class, "factory");
   }
 
@@ -72,6 +71,7 @@ public class FactoryTest {
       instance = theClass.getDeclaredField(fieldName);
       instance.setAccessible(true);
       instance.set(null, null);
+      instance.setAccessible(false);
     } catch (Exception e) {
       throw new RuntimeException();
     }
@@ -83,8 +83,8 @@ public class FactoryTest {
 
     SimpleFactory factory = SimpleFactory.getInstance();
 
-    for (Map.Entry<String, Class> entry : juices.entrySet()) {
-      String wantedJuice = entry.getKey();
+    for (Map.Entry<JuiceType, Class> entry : juices.entrySet()) {
+      JuiceType wantedJuice = entry.getKey();
       Class expectedClass = entry.getValue();
 
       Juice juice = factory.makeJuice(wantedJuice);
@@ -100,28 +100,28 @@ public class FactoryTest {
     FactoryMethod factory;
 
     factory = new PolishFactory();
-    Juice juice1 = factory.makeJuice("orange");
+    Juice juice1 = factory.makeJuice(JuiceType.KIWI);
     System.out.println(juice1.getClass());
-    Juice juice2 = factory.makeJuice("strawberry");
+    Juice juice2 = factory.makeJuice(JuiceType.MANGO);
     System.out.println(juice2.getClass());
 
     factory = new AmericanFactory();
-    Juice juice3 = factory.makeJuice("kiwi");
+    Juice juice3 = factory.makeJuice(JuiceType.ORANGE);
     System.out.println(juice3.getClass());
 
     factory = new GermanFactory();
-    Juice juice4 = factory.makeJuice("mango");
+    Juice juice4 = factory.makeJuice(JuiceType.POMEGRANATE);
     System.out.println(juice4.getClass());
 
     factory = new EnglishFactory();
-    Juice juice5 = factory.makeJuice("pomegranate");
+    Juice juice5 = factory.makeJuice(JuiceType.STRAWBERRY);
     System.out.println(juice5.getClass());
 
-    assertThat(juice1, instanceOf(OrangeJuice.class));
-    assertThat(juice2, instanceOf(StrawberryJuice.class));
-    assertThat(juice3, instanceOf(KiwiJuice.class));
-    assertThat(juice4, instanceOf(MangoJuice.class));
-    assertThat(juice5, instanceOf(PomegranateJuice.class));
+    assertThat(juice1, instanceOf(KiwiJuice.class));
+    assertThat(juice2, instanceOf(MangoJuice.class));
+    assertThat(juice3, instanceOf(OrangeJuice.class));
+    assertThat(juice4, instanceOf(PomegranateJuice.class));
+    assertThat(juice5, instanceOf(StrawberryJuice.class));
   }
 
   @Test
@@ -130,8 +130,8 @@ public class FactoryTest {
 
     SimpleFactory factory = SimpleFactory.getInstance();
 
-    for (Map.Entry<String, Class> entry : beers.entrySet()) {
-      String wantedBeer = entry.getKey();
+    for (Map.Entry<BeerType, Class> entry : beers.entrySet()) {
+      BeerType wantedBeer = entry.getKey();
       Class expectedClass = entry.getValue();
 
       Beer beer = factory.makeBeer(wantedBeer);
@@ -147,17 +147,17 @@ public class FactoryTest {
     FactoryMethod factory;
 
     factory = new PolishFactory();
-    Beer beer1 = factory.makeBeer("lager");
-    Beer beer2 = factory.makeBeer("wheat");
+    Beer beer1 = factory.makeBeer(BeerType.LAGER);
+    Beer beer2 = factory.makeBeer(BeerType.PILZNER);
 
     factory = new AmericanFactory();
-    Beer beer3 = factory.makeBeer("pilzner");
+    Beer beer3 = factory.makeBeer(BeerType.PORTER);
 
     factory = new GermanFactory();
-    Beer beer4 = factory.makeBeer("porter");
+    Beer beer4 = factory.makeBeer(BeerType.STOUT);
 
     factory = new EnglishFactory();
-    Beer beer5 = factory.makeBeer("stout");
+    Beer beer5 = factory.makeBeer(BeerType.WHEAT);
 
     System.out.println(beer1.getClass());
     System.out.println(beer2.getClass());
@@ -166,10 +166,10 @@ public class FactoryTest {
     System.out.println(beer5.getClass());
 
     assertThat(beer1, instanceOf(LagerBeer.class));
-    assertThat(beer2, instanceOf(WheatBeer.class));
-    assertThat(beer3, instanceOf(PilznerBeer.class));
-    assertThat(beer4, instanceOf(PorterBeer.class));
-    assertThat(beer5, instanceOf(StoutBeer.class));
+    assertThat(beer2, instanceOf(PilznerBeer.class));
+    assertThat(beer3, instanceOf(PorterBeer.class));
+    assertThat(beer4, instanceOf(StoutBeer.class));
+    assertThat(beer5, instanceOf(WheatBeer.class));
   }
 
   @Test
@@ -178,8 +178,8 @@ public class FactoryTest {
 
     SimpleFactory factory = SimpleFactory.getInstance();
 
-    for (Map.Entry<String, Class> entry : teas.entrySet()) {
-      String wantedTea = entry.getKey();
+    for (Map.Entry<TeaType, Class> entry : teas.entrySet()) {
+      TeaType wantedTea = entry.getKey();
       Class expectedClass = entry.getValue();
 
       Tea tea = factory.makeTea(wantedTea);
@@ -195,17 +195,17 @@ public class FactoryTest {
     FactoryMethod factory;
 
     factory = new PolishFactory();
-    Tea tea1 = factory.makeTea("black");
-    Tea tea2 = factory.makeTea("green");
+    Tea tea1 = factory.makeTea(TeaType.BLACK);
+    Tea tea2 = factory.makeTea(TeaType.GREEN);
 
     factory = new AmericanFactory();
-    Tea tea3 = factory.makeTea("red");
+    Tea tea3 = factory.makeTea(TeaType.RED);
 
     factory = new GermanFactory();
-    Tea tea4 = factory.makeTea("white");
+    Tea tea4 = factory.makeTea(TeaType.WHITE);
 
     factory = new EnglishFactory();
-    Tea tea5 = factory.makeTea("yellow");
+    Tea tea5 = factory.makeTea(TeaType.YELLOW);
 
     System.out.println(tea1.getClass());
     System.out.println(tea2.getClass());
@@ -245,7 +245,7 @@ public class FactoryTest {
 	  startTime = System.currentTimeMillis();
     for (int i = 0; i < limit; i++) {
       SimpleFactory simpleFactory = SimpleFactory.getInstance();
-      Juice juice = simpleFactory.makeJuice("orange");
+      Juice juice = simpleFactory.makeJuice(JuiceType.ORANGE);
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
@@ -256,7 +256,7 @@ public class FactoryTest {
     for (int i = 0; i < limit; i++) {
       FactoryMethod factory;
       factory = new PolishFactory();
-      Juice juice = factory.makeJuice("orange");
+      Juice juice = factory.makeJuice(JuiceType.ORANGE);
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;

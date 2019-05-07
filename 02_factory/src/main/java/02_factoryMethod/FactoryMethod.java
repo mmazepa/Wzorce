@@ -5,9 +5,9 @@ abstract class FactoryMethod implements Serializable {
 
   protected abstract FactoryMethod getInstance();
 
-  protected abstract Juice makeJuice(String type);
-  protected abstract Beer makeBeer(String type);
-  protected abstract Tea makeTea(String type);
+  protected abstract Juice makeJuice(JuiceType type);
+  protected abstract Beer makeBeer(BeerType type);
+  protected abstract Tea makeTea(TeaType type);
 
   protected Object readResolve() {
     factory = this;
