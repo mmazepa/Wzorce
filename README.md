@@ -46,38 +46,27 @@ w roku akademickim 2018/2019.
     <td>37.5%</td>
   </tr>
   <tr>
-    <td rowspan="3">
-      Zadanie duże (projekt)<br/>
-      <br/>
-      <b>Tytuł:</b> "Biblioteka"
+    <td rowspan="6">
+      Zadanie duże (projekt)
     </td>
-    <td rowspan="3">-</td>
-    <td>
-      <b>Konstrukcyjne:</b></br>
-      <ul style="list-style-type:circle;">
-        <li>...</li>
-        <li>...</li>
-      </ul>
-    </td>
-    <td rowspan="3">0/20 pkt</td>
+    <td rowspan="6">-</td>
+    <td>-</td>
+    <td rowspan="6">0/20 pkt</td>
   </tr>
   <tr>
-    <td>
-      <b>Strukturalne:</b></br>
-      <ul style="list-style-type:circle;">
-        <li>...</li>
-        <li>...</li>
-      </ul>
-    </td>
+    <td>-</td>
   </tr>
   <tr>
-    <td>
-      <b>Czynnościowe:</b></br>
-      <ul style="list-style-type:circle;">
-        <li>...</li>
-        <li>...</li>
-      </ul>
-    </td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>-</td>
   </tr>
   <tr>
     <td colspan="3" align="right"><b>SUMA (ogółem):</b></td>
