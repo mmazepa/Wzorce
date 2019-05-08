@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 import java.util.concurrent.TimeUnit;
+import java.lang.reflect.InvocationTargetException;
 
 public class FactoryTest {
 
@@ -235,7 +236,7 @@ public class FactoryTest {
   }
 
   @Test
-  public void timeTest() {
+  public void timeTest() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
     fm.testHeader("Factories Time Test");
 
     long startTime, endTime, timeElapsed;
@@ -249,7 +250,7 @@ public class FactoryTest {
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
-    System.out.println("   SimpleFactory:   " + timeElapsed + " ms");
+    System.out.println("   SimpleFactory:                 " + timeElapsed + " ms");
 
     // ----- FACTORY METHOD TIME TEST ------------------------------------------
     startTime = System.currentTimeMillis();
@@ -260,7 +261,7 @@ public class FactoryTest {
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
-    System.out.println("   FactoryMethod:   " + timeElapsed + " ms");
+    System.out.println("   FactoryMethod:                 " + timeElapsed + " ms");
 
     // ----- ABSTRACT FACTORY TIME TEST ----------------------------------------
     startTime = System.currentTimeMillis();
@@ -271,6 +272,28 @@ public class FactoryTest {
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
-    System.out.println("   AbstractFactory: " + timeElapsed + " ms");
+    System.out.println("   AbstractFactory:               " + timeElapsed + " ms");
+
+    // ----- REGISTRATION CLASS WITH REFLECTION FACTORY TEST -------------------
+    startTime = System.currentTimeMillis();
+    for (int i = 0; i < limit; i++) {
+      ClassRegisterReflectionFactory factory = ClassRegisterReflectionFactory.getInstance();
+      factory.registerJuice(JuiceType.ORANGE, OrangeJuice.class);
+      Juice juice = factory.makeJuice(JuiceType.ORANGE);
+    }
+    endTime = System.currentTimeMillis();
+    timeElapsed = endTime - startTime;
+    System.out.println("   RegistrationClassReflection:   " + timeElapsed + " ms");
+
+    // ----- REGISTRATION CLASS WITHOUT REFLECTION FACTORY TEST ----------------
+    startTime = System.currentTimeMillis();
+    for (int i = 0; i < limit; i++) {
+      ClassRegisterNoReflectionFactory factory = ClassRegisterNoReflectionFactory.getInstance();
+      factory.registerJuice(JuiceType.ORANGE, new OrangeJuiceSupplier());
+      Juice juice = factory.makeJuice(JuiceType.ORANGE);
+    }
+    endTime = System.currentTimeMillis();
+    timeElapsed = endTime - startTime;
+    System.out.println("   RegistrationClassNoReflection: " + timeElapsed + " ms");
   }
 }
