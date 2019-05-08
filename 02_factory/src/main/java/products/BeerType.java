@@ -1,3 +1,3 @@
 public enum BeerType {
-    LAGER, PILZNER, PORTER, STOUT, WHEAT
+  LAGER, PILZNER, PORTER, STOUT, WHEAT
 }

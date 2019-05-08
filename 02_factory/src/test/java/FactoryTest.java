@@ -89,9 +89,10 @@ public class FactoryTest {
       Class expectedClass = entry.getValue();
 
       Juice juice = factory.makeJuice(wantedJuice);
-      System.out.println("ZAMÓWIENIE/ODBIÓR: " + expectedClass + "/" + juice.getClass());
       assertThat(juice, instanceOf(expectedClass));
     }
+
+    System.out.println("   OK!");
   }
 
   @Test
@@ -102,27 +103,24 @@ public class FactoryTest {
 
     factory = new PolishFactory();
     Juice juice1 = factory.makeJuice(JuiceType.KIWI);
-    System.out.println(juice1.getClass());
     Juice juice2 = factory.makeJuice(JuiceType.MANGO);
-    System.out.println(juice2.getClass());
 
     factory = new AmericanFactory();
     Juice juice3 = factory.makeJuice(JuiceType.ORANGE);
-    System.out.println(juice3.getClass());
 
     factory = new GermanFactory();
     Juice juice4 = factory.makeJuice(JuiceType.POMEGRANATE);
-    System.out.println(juice4.getClass());
 
     factory = new EnglishFactory();
     Juice juice5 = factory.makeJuice(JuiceType.STRAWBERRY);
-    System.out.println(juice5.getClass());
 
     assertThat(juice1, instanceOf(KiwiJuice.class));
     assertThat(juice2, instanceOf(MangoJuice.class));
     assertThat(juice3, instanceOf(OrangeJuice.class));
     assertThat(juice4, instanceOf(PomegranateJuice.class));
     assertThat(juice5, instanceOf(StrawberryJuice.class));
+
+    System.out.println("   OK!");
   }
 
   @Test
@@ -136,9 +134,10 @@ public class FactoryTest {
       Class expectedClass = entry.getValue();
 
       Beer beer = factory.makeBeer(wantedBeer);
-      System.out.println("ZAMÓWIENIE/ODBIÓR: " + expectedClass + "/" + beer.getClass());
       assertThat(beer, instanceOf(expectedClass));
     }
+
+    System.out.println("   OK!");
   }
 
   @Test
@@ -160,17 +159,13 @@ public class FactoryTest {
     factory = new EnglishFactory();
     Beer beer5 = factory.makeBeer(BeerType.WHEAT);
 
-    System.out.println(beer1.getClass());
-    System.out.println(beer2.getClass());
-    System.out.println(beer3.getClass());
-    System.out.println(beer4.getClass());
-    System.out.println(beer5.getClass());
-
     assertThat(beer1, instanceOf(LagerBeer.class));
     assertThat(beer2, instanceOf(PilznerBeer.class));
     assertThat(beer3, instanceOf(PorterBeer.class));
     assertThat(beer4, instanceOf(StoutBeer.class));
     assertThat(beer5, instanceOf(WheatBeer.class));
+
+    System.out.println("   OK!");
   }
 
   @Test
@@ -184,9 +179,10 @@ public class FactoryTest {
       Class expectedClass = entry.getValue();
 
       Tea tea = factory.makeTea(wantedTea);
-      System.out.println("ZAMÓWIENIE/ODBIÓR: " + expectedClass + "/" + tea.getClass());
       assertThat(tea, instanceOf(expectedClass));
     }
+
+    System.out.println("   OK!");
   }
 
   @Test
@@ -208,17 +204,13 @@ public class FactoryTest {
     factory = new EnglishFactory();
     Tea tea5 = factory.makeTea(TeaType.YELLOW);
 
-    System.out.println(tea1.getClass());
-    System.out.println(tea2.getClass());
-    System.out.println(tea3.getClass());
-    System.out.println(tea4.getClass());
-    System.out.println(tea5.getClass());
-
     assertThat(tea1, instanceOf(BlackTea.class));
     assertThat(tea2, instanceOf(GreenTea.class));
     assertThat(tea3, instanceOf(RedTea.class));
     assertThat(tea4, instanceOf(WhiteTea.class));
     assertThat(tea5, instanceOf(YellowTea.class));
+
+    System.out.println("   OK!");
   }
 
   @Test
@@ -233,6 +225,8 @@ public class FactoryTest {
       else
         preparedBottle = new PreparedBottle(bottleName, new PorterFactory());
     }
+
+    System.out.println("   OK!");
   }
 
   @Test
@@ -241,6 +235,7 @@ public class FactoryTest {
 
     long startTime, endTime, timeElapsed;
     int limit = 1000000;
+    final Object[][] results = new String[5][];
 
     // ----- SIMPLE FACTORY TIME TEST ------------------------------------------
 	  startTime = System.currentTimeMillis();
@@ -250,7 +245,7 @@ public class FactoryTest {
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
-    System.out.println("   SimpleFactory:                 " + timeElapsed + " ms");
+    results[0] = new String[] { "1", "SimpleFactory", timeElapsed + " ms" };
 
     // ----- FACTORY METHOD TIME TEST ------------------------------------------
     startTime = System.currentTimeMillis();
@@ -261,7 +256,7 @@ public class FactoryTest {
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
-    System.out.println("   FactoryMethod:                 " + timeElapsed + " ms");
+    results[1] = new String[] { "2", "FactoryMethod", timeElapsed + " ms" };
 
     // ----- ABSTRACT FACTORY TIME TEST ----------------------------------------
     startTime = System.currentTimeMillis();
@@ -272,7 +267,7 @@ public class FactoryTest {
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
-    System.out.println("   AbstractFactory:               " + timeElapsed + " ms");
+    results[2] = new String[] { "3", "AbstractFactory", timeElapsed + " ms" };
 
     // ----- REGISTRATION CLASS WITH REFLECTION FACTORY TEST -------------------
     startTime = System.currentTimeMillis();
@@ -283,7 +278,7 @@ public class FactoryTest {
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
-    System.out.println("   RegistrationClassReflection:   " + timeElapsed + " ms");
+    results[3] = new String[] { "4", "RegistrationClassReflection", timeElapsed + " ms" };
 
     // ----- REGISTRATION CLASS WITHOUT REFLECTION FACTORY TEST ----------------
     startTime = System.currentTimeMillis();
@@ -294,6 +289,8 @@ public class FactoryTest {
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
-    System.out.println("   RegistrationClassNoReflection: " + timeElapsed + " ms");
+    results[4] = new String[] { "5", "RegistrationClassNoReflection", timeElapsed + " ms" };
+
+    fm.printResults(results);
   }
 }

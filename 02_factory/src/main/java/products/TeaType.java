@@ -1,3 +1,3 @@
 public enum TeaType {
-    BLACK, GREEN, RED, WHITE, YELLOW
+  BLACK, GREEN, RED, WHITE, YELLOW
 }

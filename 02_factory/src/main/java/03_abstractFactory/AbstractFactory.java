@@ -4,28 +4,28 @@ interface Sticker { void process(); }
 class LagerBottle implements Bottle {
   @Override
   public void process() {
-    System.out.println("   Wybieram butelkę od Lagera...");
+    // System.out.println("   Wybieram butelkę od Lagera...");
   }
 }
 
 class LagerSticker implements Sticker {
   @Override
   public void process() {
-    System.out.println("   Naklejam naklejkę Lagera...");
+    // System.out.println("   Naklejam naklejkę Lagera...");
   }
 }
 
 class PorterBottle implements Bottle {
   @Override
   public void process() {
-    System.out.println("   Wybieram butelkę od Portera...");
+    // System.out.println("   Wybieram butelkę od Portera...");
   }
 }
 
 class PorterSticker implements Sticker {
   @Override
   public void process() {
-    System.out.println("   Naklejam naklejkę Portera...");
+    // System.out.println("   Naklejam naklejkę Portera...");
   }
 }
 
@@ -65,15 +65,15 @@ class PreparedBottle {
 
   public PreparedBottle(String serialNumber, BottleFactory factory) {
     this.serialNumber = serialNumber;
-    bottle = factory.createBottle();
-    sticker = factory.createSticker();
-    // process();
+    this.bottle = factory.createBottle();
+    this.sticker = factory.createSticker();
+    this.process();
   }
 
   private void process() {
-    System.out.println("Rozpoczynam tworzenie butelki [" + serialNumber + "].");
+    // System.out.println("Rozpoczynam tworzenie butelki [" + serialNumber + "].");
     bottle.process();
     sticker.process();
-    System.out.println("Zakończyłem tworzenie butelki [" + serialNumber + "].");
+    // System.out.println("Zakończyłem tworzenie butelki [" + serialNumber + "].");
   }
 }
