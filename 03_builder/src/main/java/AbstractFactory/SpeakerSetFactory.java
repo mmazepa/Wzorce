@@ -1,5 +1,5 @@
-package factory;
-import manager.BuilderManager;
+package factory_package;
+import manager_package.BuilderManager;
 
 public class SpeakerSetFactory implements SpeakerSetAbstractFactory {
   private static SpeakerSetFactory factory;

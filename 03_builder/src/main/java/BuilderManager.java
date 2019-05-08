@@ -1,4 +1,4 @@
-package manager;
+package manager_package;
 
 public class BuilderManager {
   private static boolean isTimeTest = false;

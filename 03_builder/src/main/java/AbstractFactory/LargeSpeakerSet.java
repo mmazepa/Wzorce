@@ -1,4 +1,4 @@
-package factory;
+package factory_package;
 
 public class LargeSpeakerSet extends SpeakerSet {
     public LargeSpeakerSet() {

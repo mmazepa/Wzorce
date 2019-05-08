@@ -1,4 +1,4 @@
-package builder;
+package builder_package;
 
 public abstract class SpeakerSetBuilder {
   protected SpeakerSet speakerSet;

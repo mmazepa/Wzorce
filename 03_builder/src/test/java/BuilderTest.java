@@ -6,9 +6,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.*;;
 
-import manager.BuilderManager;
-import builder.*;
-import factory.*;
+import manager_package.BuilderManager;
+import builder_package.*;
+import factory_package.*;
 
 public class BuilderTest {
   static BuilderManager bm = new BuilderManager();
@@ -43,18 +43,18 @@ public class BuilderTest {
 
     Shop shop = new Shop();
 
-    builder.SpeakerSet small = shop.construct(new SmallSetBuilder());
+    builder_package.SpeakerSet small = shop.construct(new SmallSetBuilder());
     small.show();
 
-    builder.SpeakerSet medium = shop.construct(new MediumSetBuilder());
+    builder_package.SpeakerSet medium = shop.construct(new MediumSetBuilder());
     medium.show();
 
-    builder.SpeakerSet large = shop.construct(new LargeSetBuilder());
+    builder_package.SpeakerSet large = shop.construct(new LargeSetBuilder());
     large.show();
 
-    assertThat(small, instanceOf(builder.SpeakerSet.class));
-    assertThat(medium, instanceOf(builder.SpeakerSet.class));
-    assertThat(large, instanceOf(builder.SpeakerSet.class));
+    assertThat(small, instanceOf(builder_package.SpeakerSet.class));
+    assertThat(medium, instanceOf(builder_package.SpeakerSet.class));
+    assertThat(large, instanceOf(builder_package.SpeakerSet.class));
   }
 
   @Test
@@ -64,18 +64,18 @@ public class BuilderTest {
 
     SpeakerSetFactory speakerSetFactory = SpeakerSetFactory.getInstance();
 
-    factory.SpeakerSet small = speakerSetFactory.makeSpeakerSet(SpeakerSetType.SMALL);
+    factory_package.SpeakerSet small = speakerSetFactory.makeSpeakerSet(SpeakerSetType.SMALL);
     small.show();
 
-    factory.SpeakerSet medium = speakerSetFactory.makeSpeakerSet(SpeakerSetType.MEDIUM);
+    factory_package.SpeakerSet medium = speakerSetFactory.makeSpeakerSet(SpeakerSetType.MEDIUM);
     small.show();
 
-    factory.SpeakerSet large = speakerSetFactory.makeSpeakerSet(SpeakerSetType.LARGE);
+    factory_package.SpeakerSet large = speakerSetFactory.makeSpeakerSet(SpeakerSetType.LARGE);
     small.show();
 
-    assertThat(small, instanceOf(factory.SpeakerSet.class));
-    assertThat(medium, instanceOf(factory.SpeakerSet.class));
-    assertThat(large, instanceOf(factory.SpeakerSet.class));
+    assertThat(small, instanceOf(factory_package.SpeakerSet.class));
+    assertThat(medium, instanceOf(factory_package.SpeakerSet.class));
+    assertThat(large, instanceOf(factory_package.SpeakerSet.class));
   }
 
   @Test
@@ -94,7 +94,7 @@ public class BuilderTest {
 
     startTime = System.currentTimeMillis();
     for (int i = 0; i < limit; i++) {
-      builder.SpeakerSet speaker = shop.construct(new SmallSetBuilder());
+      builder_package.SpeakerSet speaker = shop.construct(new SmallSetBuilder());
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
@@ -105,7 +105,7 @@ public class BuilderTest {
 
     startTime = System.currentTimeMillis();
     for (int i = 0; i < limit; i++) {
-      factory.SpeakerSet speaker = speakerSetFactory.makeSpeakerSet(SpeakerSetType.SMALL);
+      factory_package.SpeakerSet speaker = speakerSetFactory.makeSpeakerSet(SpeakerSetType.SMALL);
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;

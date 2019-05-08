@@ -1,5 +1,5 @@
-package builder;
-import manager.BuilderManager;
+package builder_package;
+import manager_package.BuilderManager;
 
 public class Shop {
   BuilderManager bm = new BuilderManager();

@@ -1,4 +1,4 @@
-package builder;
+package builder_package;
 
 public class LargeSetBuilder extends SpeakerSetBuilder {
   public LargeSetBuilder() {

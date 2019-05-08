@@ -1,4 +1,4 @@
-package builder;
+package builder_package;
 
 public class SmallSetBuilder extends SpeakerSetBuilder {
   public SmallSetBuilder() {
