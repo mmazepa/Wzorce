@@ -21,8 +21,6 @@ public class LargeSetFactory implements SpeakerSetAbstractFactory {
 	@Override
 	public SpeakerSet createSpeakerSet() {
     bm.printWithLinesAround("   Trwa budowanie zestawu głośników...");
-    bm.println("   [" + this.getClass().getSimpleName() + "]");
-
 		return new LargeSpeakerSet(speakerSetType, membranes, amplifier, speakers, color);
 	}
 }

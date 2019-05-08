@@ -1,18 +1,18 @@
 package factory_package;
 
+import java.util.Map;
+import java.util.HashMap;
+
 public class SmallSpeakerSet extends SpeakerSet {
   private String speakerSetType;
-  private String membranes;
-  private String amplifier;
-  private String speakers;
-  private String color;
+  private Map<String, String> parts = new HashMap<String, String>();
 
   public SmallSpeakerSet(String speakerSetType, String membranes, String amplifier, String speakers, String color) {
     this.speakerSetType = speakerSetType;
-    this.membranes = membranes;
-    this.amplifier = amplifier;
-    this.speakers = speakers;
-    this.color = color;
+    parts.put("Membrany", membranes);
+    parts.put("Wzmacniacz", amplifier);
+    parts.put("Głośniki", speakers);
+    parts.put("Kolor", color);
   }
 
   @Override
@@ -22,21 +22,21 @@ public class SmallSpeakerSet extends SpeakerSet {
 
   @Override
   public String getMembranes() {
-    return this.membranes;
+    return this.parts.get("Membrany");
   }
 
   @Override
   public String getAmplifier() {
-    return this.amplifier;
+    return this.parts.get("Wzmacniacz");
   }
 
   @Override
   public String getSpeakers() {
-    return this.speakers;
+    return this.parts.get("Głośniki");
   }
 
   @Override
   public String getColor() {
-    return this.color;
+    return this.parts.get("Kolor");
   }
 }

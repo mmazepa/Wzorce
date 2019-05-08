@@ -21,8 +21,6 @@ public class SmallSetFactory implements SpeakerSetAbstractFactory {
 	@Override
 	public SpeakerSet createSpeakerSet() {
     bm.printWithLinesAround("   Trwa budowanie zestawu głośników...");
-    bm.println("   [" + this.getClass().getSimpleName() + "]");
-
 		return new SmallSpeakerSet(speakerSetType, membranes, amplifier, speakers, color);
 	}
 }
