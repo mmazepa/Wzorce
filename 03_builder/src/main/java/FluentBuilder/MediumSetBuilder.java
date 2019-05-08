@@ -1,4 +1,6 @@
-class MediumSetBuilder extends SpeakerSetBuilder {
+package builder;
+
+public class MediumSetBuilder extends SpeakerSetBuilder {
   public MediumSetBuilder() {
     speakerSet = new SpeakerSet("Głośniki 2.1");
   }

@@ -1,3 +1,5 @@
+package factory;
+
 public interface SpeakerSetAbstractFactory {
-    SpeakerSetBase makeSpeakerSet(SpeakerSetType speakerSetType);
+    SpeakerSet makeSpeakerSet(SpeakerSetType speakerSetType);
 }

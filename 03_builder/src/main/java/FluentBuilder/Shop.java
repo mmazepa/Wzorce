@@ -1,9 +1,12 @@
-class Shop {
-  SpeakerSetBuilderManager ssbm = new SpeakerSetBuilderManager();
+package builder;
+import manager.BuilderManager;
+
+public class Shop {
+  BuilderManager bm = new BuilderManager();
 
   public SpeakerSet construct(SpeakerSetBuilder builder) {
-    ssbm.printWithLinesAround("   Trwa budowanie zestawu głośników...");
-    ssbm.println("   [" + builder.getClass().getSimpleName() + "]");
+    bm.printWithLinesAround("   Trwa budowanie zestawu głośników...");
+    bm.println("   [" + builder.getClass().getSimpleName() + "]");
     return SpeakerSetBuilder.getSpeakerSet(builder);
   }
 }

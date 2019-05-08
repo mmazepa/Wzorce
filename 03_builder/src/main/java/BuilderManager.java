@@ -1,4 +1,6 @@
-public class SpeakerSetBuilderManager {
+package manager;
+
+public class BuilderManager {
   private static boolean isTimeTest = false;
 
   public void setIsTimeTest(boolean isTimeTest) {

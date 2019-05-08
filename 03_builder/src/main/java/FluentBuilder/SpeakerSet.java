@@ -1,8 +1,10 @@
+package builder;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
 
-class SpeakerSet {
+public class SpeakerSet {
   private String speakerSetType;
   private Map<String, String> parts = new HashMap<String, String>();
 

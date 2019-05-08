@@ -1,4 +1,6 @@
-public class LargeSpeakerSet extends SpeakerSetBase {
+package factory;
+
+public class LargeSpeakerSet extends SpeakerSet {
     public LargeSpeakerSet() {
         this.setSpeakerSetType("Głośniki 5.1");
         this.setPart("Membrany", "7");

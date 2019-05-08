@@ -1,4 +1,6 @@
-public class MediumSpeakerSet extends SpeakerSetBase {
+package factory;
+
+public class MediumSpeakerSet extends SpeakerSet {
     public MediumSpeakerSet() {
         this.setSpeakerSetType("Głośniki 2.1");
         this.setPart("Membrany", "3");

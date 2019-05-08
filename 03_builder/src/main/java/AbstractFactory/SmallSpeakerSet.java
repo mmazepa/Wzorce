@@ -1,4 +1,6 @@
-public class SmallSpeakerSet extends SpeakerSetBase {
+package factory;
+
+public class SmallSpeakerSet extends SpeakerSet {
     public SmallSpeakerSet() {
         this.setSpeakerSetType("Głośniki 2.0");
         this.setPart("Membrany", "2");

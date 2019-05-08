@@ -1,4 +1,6 @@
-class SmallSetBuilder extends SpeakerSetBuilder {
+package builder;
+
+public class SmallSetBuilder extends SpeakerSetBuilder {
   public SmallSetBuilder() {
     speakerSet = new SpeakerSet("Głośniki 2.0");
   }

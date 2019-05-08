@@ -1,4 +1,6 @@
-abstract class SpeakerSetBuilder {
+package builder;
+
+public abstract class SpeakerSetBuilder {
   protected SpeakerSet speakerSet;
 
   public SpeakerSet getSpeakerSet() {

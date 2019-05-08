@@ -1,5 +1,9 @@
+package factory;
+import manager.BuilderManager;
+
 public class SpeakerSetFactory implements SpeakerSetAbstractFactory {
   private static SpeakerSetFactory factory;
+  BuilderManager bm = new BuilderManager();
 
   private SpeakerSetFactory() {}
 
@@ -14,7 +18,9 @@ public class SpeakerSetFactory implements SpeakerSetAbstractFactory {
     return factory;
   }
 
-  public SpeakerSetBase makeSpeakerSet(SpeakerSetType type) {
+  public SpeakerSet makeSpeakerSet(SpeakerSetType type) {
+    bm.printWithLinesAround("   Trwa budowanie zestawu głośników...");
+    bm.println("   [" + type + "]");
     switch (type) {
       case SMALL:
         return new SmallSpeakerSet();
