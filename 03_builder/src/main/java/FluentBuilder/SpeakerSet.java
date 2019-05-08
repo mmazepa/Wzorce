@@ -12,13 +12,6 @@ public class SpeakerSet {
     this.speakerSetType = speakerSetType;
   }
 
-  public void setSpeakerSetType(String speakerSetType) {
-    this.speakerSetType = speakerSetType;
-  }
-  public String getSpeakerSetType() {
-    return speakerSetType;
-  }
-
   public void setPart(String partKey, String partValue) {
     parts.put(partKey, partValue);
   }

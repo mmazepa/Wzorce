@@ -1,11 +1,42 @@
 package factory_package;
 
 public class LargeSpeakerSet extends SpeakerSet {
-    public LargeSpeakerSet() {
-        this.setSpeakerSetType("Głośniki 5.1");
-        this.setPart("Membrany", "7");
-        this.setPart("Wzmacniacz", "120W");
-        this.setPart("Głośniki", "6");
-        this.setPart("Kolor", "czarny");
-    }
+  private String speakerSetType;
+  private String membranes;
+  private String amplifier;
+  private String speakers;
+  private String color;
+
+  public LargeSpeakerSet(String speakerSetType, String membranes, String amplifier, String speakers, String color) {
+    this.speakerSetType = speakerSetType;
+    this.membranes = membranes;
+    this.amplifier = amplifier;
+    this.speakers = speakers;
+    this.color = color;
+  }
+
+  @Override
+  public String getSpeakerSetType() {
+    return this.speakerSetType;
+  }
+
+  @Override
+  public String getMembranes() {
+    return this.membranes;
+  }
+
+  @Override
+  public String getAmplifier() {
+    return this.amplifier;
+  }
+
+  @Override
+  public String getSpeakers() {
+    return this.speakers;
+  }
+
+  @Override
+  public String getColor() {
+    return this.color;
+  }
 }

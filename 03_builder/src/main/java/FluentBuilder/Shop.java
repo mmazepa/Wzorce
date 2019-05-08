@@ -7,6 +7,12 @@ public class Shop {
   public SpeakerSet construct(SpeakerSetBuilder builder) {
     bm.printWithLinesAround("   Trwa budowanie zestawu głośników...");
     bm.println("   [" + builder.getClass().getSimpleName() + "]");
-    return SpeakerSetBuilder.getSpeakerSet(builder);
+
+    return builder
+      .buildMembranes()
+      .buildAmplifier()
+      .buildSpeakers()
+      .paintSpeakerSet()
+      .getSpeakerSet();
   }
 }

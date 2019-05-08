@@ -55,10 +55,6 @@ public class BuilderTest {
     assertThat(small, instanceOf(builder_package.SpeakerSet.class));
     assertThat(medium, instanceOf(builder_package.SpeakerSet.class));
     assertThat(large, instanceOf(builder_package.SpeakerSet.class));
-
-    assertEquals(small.getSpeakerSetType(), "Głośniki 2.0");
-    assertEquals(medium.getSpeakerSetType(), "Głośniki 2.1");
-    assertEquals(large.getSpeakerSetType(), "Głośniki 5.1");
   }
 
   @Test
@@ -66,24 +62,20 @@ public class BuilderTest {
     bm.testHeader("Simple Factory Test");
     bm.setIsTimeTest(false);
 
-    SpeakerSetFactory speakerSetFactory = SpeakerSetFactory.getInstance();
+    SpeakerSetFactory factory = new SpeakerSetFactory();
 
-    factory_package.SpeakerSet small = speakerSetFactory.makeSpeakerSet(SpeakerSetType.SMALL);
-    small.show();
+    factory_package.SpeakerSet small = factory.getSpeakerSet(new SmallSetFactory("Głośniki 2.0", "2", "14W", "2", "biały"));
+    System.out.println(small);
 
-    factory_package.SpeakerSet medium = speakerSetFactory.makeSpeakerSet(SpeakerSetType.MEDIUM);
-    medium.show();
+    factory_package.SpeakerSet medium = factory.getSpeakerSet(new MediumSetFactory("Głośniki 2.1", "3", "60W", "3", "srebrny"));
+    System.out.println(medium);
 
-    factory_package.SpeakerSet large = speakerSetFactory.makeSpeakerSet(SpeakerSetType.LARGE);
-    large.show();
+    factory_package.SpeakerSet large = factory.getSpeakerSet(new LargeSetFactory("Głośniki 5.1", "6", "120W", "7", "czarny"));
+    System.out.println(large);
 
-    assertThat(small, instanceOf(factory_package.SpeakerSet.class));
-    assertThat(medium, instanceOf(factory_package.SpeakerSet.class));
-    assertThat(large, instanceOf(factory_package.SpeakerSet.class));
-
-    assertEquals(small.getSpeakerSetType(), "Głośniki 2.0");
-    assertEquals(medium.getSpeakerSetType(), "Głośniki 2.1");
-    assertEquals(large.getSpeakerSetType(), "Głośniki 5.1");
+    assertThat(small, instanceOf(SmallSpeakerSet.class));
+    assertThat(medium, instanceOf(MediumSpeakerSet.class));
+    assertThat(large, instanceOf(LargeSpeakerSet.class));
   }
 
   @Test
@@ -97,23 +89,22 @@ public class BuilderTest {
     Long[] results = new Long[2];
 
     // ----- BUILDER TIME TEST -------------------------------------------------
-    SpeakerSetBuilder builder;
     Shop shop = new Shop();
 
     startTime = System.currentTimeMillis();
     for (int i = 0; i < limit; i++) {
-      builder_package.SpeakerSet speaker = shop.construct(new SmallSetBuilder());
+      shop.construct(new SmallSetBuilder());
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
     results[0] = timeElapsed;
 
-    // ----- BUILDER TIME TEST -------------------------------------------------
-    SpeakerSetFactory speakerSetFactory = SpeakerSetFactory.getInstance();
+    // ----- FACTORY TIME TEST -------------------------------------------------
+    SpeakerSetFactory factory = new SpeakerSetFactory();
 
     startTime = System.currentTimeMillis();
     for (int i = 0; i < limit; i++) {
-      factory_package.SpeakerSet speaker = speakerSetFactory.makeSpeakerSet(SpeakerSetType.SMALL);
+      factory.getSpeakerSet(new SmallSetFactory("Głośniki 2.0", "2", "14W", "2", "biały"));
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
