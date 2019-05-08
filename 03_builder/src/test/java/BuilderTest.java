@@ -55,6 +55,10 @@ public class BuilderTest {
     assertThat(small, instanceOf(builder_package.SpeakerSet.class));
     assertThat(medium, instanceOf(builder_package.SpeakerSet.class));
     assertThat(large, instanceOf(builder_package.SpeakerSet.class));
+
+    assertEquals(small.getSpeakerSetType(), "Głośniki 2.0");
+    assertEquals(medium.getSpeakerSetType(), "Głośniki 2.1");
+    assertEquals(large.getSpeakerSetType(), "Głośniki 5.1");
   }
 
   @Test
@@ -68,14 +72,18 @@ public class BuilderTest {
     small.show();
 
     factory_package.SpeakerSet medium = speakerSetFactory.makeSpeakerSet(SpeakerSetType.MEDIUM);
-    small.show();
+    medium.show();
 
     factory_package.SpeakerSet large = speakerSetFactory.makeSpeakerSet(SpeakerSetType.LARGE);
-    small.show();
+    large.show();
 
     assertThat(small, instanceOf(factory_package.SpeakerSet.class));
     assertThat(medium, instanceOf(factory_package.SpeakerSet.class));
     assertThat(large, instanceOf(factory_package.SpeakerSet.class));
+
+    assertEquals(small.getSpeakerSetType(), "Głośniki 2.0");
+    assertEquals(medium.getSpeakerSetType(), "Głośniki 2.1");
+    assertEquals(large.getSpeakerSetType(), "Głośniki 5.1");
   }
 
   @Test
@@ -111,10 +119,6 @@ public class BuilderTest {
     timeElapsed = endTime - startTime;
     results[1] = timeElapsed;
 
-    System.out.println("   Builder Time: " + results[0] + " ms");
-    System.out.println("   Factory Time: " + results[1] + " ms");
-    System.out.print("\n");
-    System.out.print("   And the winner is... ");
-    System.out.println(results[0] < results[1] ? "BUILDER!" : "FACTORY!");
+    bm.printResults(results);
   }
 }

@@ -40,4 +40,12 @@ public class BuilderManager {
     if (!getIsTimeTest())
       System.out.println(text);
   }
+
+  public static void printResults(Long[] results) {
+    System.out.println("   Builder Time: " + results[0] + " ms");
+    System.out.println("   Factory Time: " + results[1] + " ms");
+    System.out.print("\n");
+    System.out.print("   And the winner is... ");
+    System.out.println(results[0] < results[1] ? "BUILDER!" : "FACTORY!");
+  }
 }
