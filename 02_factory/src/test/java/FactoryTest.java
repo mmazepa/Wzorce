@@ -217,14 +217,16 @@ public class FactoryTest {
   public void abstractFactoryTest() {
     fm.testHeader("Abstract Factory Test");
 
-    PreparedBottle preparedBottle;
-    for (int i = 0; i < 5; i++) {
-      String bottleName = "Bottle-" + (i+1);
-      if (i%2 == 0)
-        preparedBottle = new PreparedBottle(bottleName, new LagerFactory());
-      else
-        preparedBottle = new PreparedBottle(bottleName, new PorterFactory());
-    }
+    NorwegianFactory norwegianFactory = NorwegianFactory.getInstance();
+    SwedishFactory swedishFactory = SwedishFactory.getInstance();
+
+    Drink norwegianMorningDrink = norwegianFactory.createDrink(JuiceType.ORANGE);
+    Drink norwegianAfternoonDrink = norwegianFactory.createDrink(JuiceType.KIWI);
+    Drink swedishMorningDrink = swedishFactory.createDrink(JuiceType.ORANGE);
+    Drink swedishAfternoonDrink = swedishFactory.createDrink(JuiceType.KIWI);
+
+    assertNotEquals(norwegianMorningDrink, norwegianAfternoonDrink);
+    assertNotEquals(swedishMorningDrink, swedishAfternoonDrink);
 
     System.out.println("   OK!");
   }
@@ -261,9 +263,8 @@ public class FactoryTest {
     // ----- ABSTRACT FACTORY TIME TEST ----------------------------------------
     startTime = System.currentTimeMillis();
     for (int i = 0; i < limit; i++) {
-      PreparedBottle preparedBottle;
-      String bottleName = "Bottle-" + (i+1);
-      preparedBottle = new PreparedBottle(bottleName, new PorterFactory());
+      SwedishFactory swedishFactory = SwedishFactory.getInstance();
+      Drink swedishMorningDrink = swedishFactory.createDrink(JuiceType.ORANGE);
     }
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
