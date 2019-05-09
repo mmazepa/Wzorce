@@ -24,26 +24,26 @@ w roku akademickim 2018/2019.
   </tr>
   <tr>
     <td>09.05.2019</td>
-    <td>Fabryka</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td>09.05.2019</td>
     <td>Budowniczy</td>
-    <td>-</td>
+    <td>3.5/4 pkt</td>
   </tr>
   <tr>
     <td>-</td>
     <td>-</td>
+    <td>0/4 pkt</td>
+  </tr>
+  <tr>
     <td>-</td>
+    <td>-</td>
+    <td>0/4 pkt</td>
   </tr>
   <tr>
     <td colspan="3" align="right"><b>SUMA (małe):</b></td>
-    <td>7.5/20 pkt</td>
+    <td>11/20 pkt</td>
   </tr>
   <tr>
     <td colspan="3" align="right"><b>PROCENT (małe):</b></td>
-    <td>37.5%</td>
+    <td>55%</td>
   </tr>
   <tr>
     <td rowspan="6">
@@ -70,10 +70,17 @@ w roku akademickim 2018/2019.
   </tr>
   <tr>
     <td colspan="3" align="right"><b>SUMA (ogółem):</b></td>
-    <td>7.5/40 pkt</td>
+    <td>11/40 pkt</td>
   </tr>
   <tr>
     <td colspan="3" align="right"><b>PROCENT (ogółem):</b></td>
-    <td>18.75%</td>
+    <td>27.5%</td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right"><b>SUMA (+obecność) na dzień 09.05.2019:</b></td>
+    <td>13.6/40 pkt</td>
+  <tr>
+    <td colspan="3" align="right"><b>PROCENT (+obecność) na dzień 09.05.2019:</b></td>
+    <td>34%</td>
   </tr>
 </table>
