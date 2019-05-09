@@ -38,7 +38,7 @@ public class BuilderTest {
 
   @Test
   public void simpleBuilderTest() {
-    bm.testHeader("Simple Builder Test");
+    bm.testHeader("Fluent Builder Test");
     bm.setIsTimeTest(false);
 
     Shop shop = new Shop();
@@ -59,7 +59,7 @@ public class BuilderTest {
 
   @Test
   public void simpleFactoryTest() {
-    bm.testHeader("Simple Factory Test");
+    bm.testHeader("Abstract Factory Test");
     bm.setIsTimeTest(false);
 
     SpeakerSetFactory factory = new SpeakerSetFactory();
