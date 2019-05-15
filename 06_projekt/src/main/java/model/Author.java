@@ -28,6 +28,6 @@ class Author {
   }
 
   public String toString() {
-    return this.firstName + " " + this.lastName;
+    return this.lastName.toUpperCase() + " " + this.firstName;
   }
 }

@@ -27,8 +27,9 @@ public class LibraryTest {
   static Library library;
 
   static DisplayManager dm = new DisplayManager();
-  static BookManager sm = new BookManager();
-  static LibraryManager msm = new LibraryManager();
+  static LibraryManager lm = new LibraryManager();
+  static BookManager bm = new BookManager();
+  // static BuilderManager brm = new BuilderManager();
 
   @BeforeClass
   public static void setUpClass() {
@@ -53,9 +54,9 @@ public class LibraryTest {
     book2 = new Book(tag2, author2, "Jezioro osobliwości", 160, 1999);
     book3 = new Book(tag3, author3, "Łowca snów", 768, 2001);
 
-    sm.setBook(tag1, book1);
-    sm.setBook(tag2, book2);
-    sm.setBook(tag3, book3);
+    bm.setBook(tag1, book1);
+    bm.setBook(tag2, book2);
+    bm.setBook(tag3, book3);
 
     ArrayList<Book> books = new ArrayList<Book>();
     books.add(book1);
@@ -63,7 +64,7 @@ public class LibraryTest {
     books.add(book3);
 
     library = new Library(libraryTag, libraryName, books);
-    msm.setLibrary(libraryTag, library);
+    lm.setLibrary(libraryTag, library);
 
     dm.horizontalLine(55);
   }
@@ -77,22 +78,22 @@ public class LibraryTest {
   public void book_shallowCopyTest() throws CloneNotSupportedException {
     dm.testHeader("Zad1. (Book) Shallow Copy Test");
 
-    Book book1_shallowCopy = (Book) sm.getBook(book1.getTag()).ShallowCopy();
+    Book book1_shallowCopy = (Book) bm.getBook(book1.getTag()).ShallowCopy();
     book1.getAuthor().setFirstName("Jadwiga");
-    sm.displayBoth("Shallow", book1, book1_shallowCopy);
+    bm.displayBoth("Shallow", book1, book1_shallowCopy);
     assertEquals(book1.getAuthor(), book1_shallowCopy.getAuthor());
     assertSame(book1.getAuthor(), book1_shallowCopy.getAuthor());
 
-    Book book2_shallowCopy = (Book) sm.getBook(book2.getTag()).ShallowCopy();
-    book2.getAuthor().setLastName("Młody");
-    sm.displayBoth("Shallow", book2, book2_shallowCopy);
+    Book book2_shallowCopy = (Book) bm.getBook(book2.getTag()).ShallowCopy();
+    book2.getAuthor().setLastName("Zmiana");
+    bm.displayBoth("Shallow", book2, book2_shallowCopy);
     assertEquals(book2.getAuthor(), book2_shallowCopy.getAuthor());
     assertSame(book2.getAuthor(), book2_shallowCopy.getAuthor());
 
-    Book book3_shallowCopy = (Book) sm.getBook(book3.getTag()).ShallowCopy();
+    Book book3_shallowCopy = (Book) bm.getBook(book3.getTag()).ShallowCopy();
     book3.getAuthor().setFirstName("Stefan");
     book3.getAuthor().setLastName("Król");
-    sm.displayBoth("Shallow", book3, book3_shallowCopy);
+    bm.displayBoth("Shallow", book3, book3_shallowCopy);
     assertEquals(book3.getAuthor(), book3_shallowCopy.getAuthor());
     assertSame(book3.getAuthor(), book3_shallowCopy.getAuthor());
   }
@@ -101,22 +102,22 @@ public class LibraryTest {
   public void book_deepCopyTest() throws CloneNotSupportedException {
     dm.testHeader("Zad1. (Book) Deep Copy Test");
 
-    Book book1_deepCopy = (Book) sm.getBook(book1.getTag()).DeepCopy();
+    Book book1_deepCopy = (Book) bm.getBook(book1.getTag()).DeepCopy();
     book1.getAuthor().setFirstName("Jadwiga");
-    sm.displayBoth("Deep", book1, book1_deepCopy);
+    bm.displayBoth("Deep", book1, book1_deepCopy);
     assertNotEquals(book1.getAuthor(), book1_deepCopy.getAuthor());
     assertNotSame(book1.getAuthor(), book1_deepCopy.getAuthor());
 
-    Book book2_deepCopy = (Book) sm.getBook(book2.getTag()).DeepCopy();
-    book2.getAuthor().setLastName("Młody");
-    sm.displayBoth("Deep", book2, book2_deepCopy);
+    Book book2_deepCopy = (Book) bm.getBook(book2.getTag()).DeepCopy();
+    book2.getAuthor().setLastName("Zmiana");
+    bm.displayBoth("Deep", book2, book2_deepCopy);
     assertNotEquals(book2.getAuthor(), book2_deepCopy.getAuthor());
     assertNotSame(book2.getAuthor(), book2_deepCopy.getAuthor());
 
-    Book book3_deepCopy = (Book) sm.getBook(book3.getTag()).DeepCopy();
+    Book book3_deepCopy = (Book) bm.getBook(book3.getTag()).DeepCopy();
     book3.getAuthor().setFirstName("Stefan");
     book3.getAuthor().setLastName("Król");
-    sm.displayBoth("Deep", book3, book3_deepCopy);
+    bm.displayBoth("Deep", book3, book3_deepCopy);
     assertNotEquals(book3.getAuthor(), book3_deepCopy.getAuthor());
     assertNotSame(book3.getAuthor(), book3_deepCopy.getAuthor());
   }
@@ -125,7 +126,7 @@ public class LibraryTest {
   public void library_shallowCopyTest() throws CloneNotSupportedException {
     dm.testHeader("Zad2. (Library) Shallow Copy Test");
 
-    Library library_shallowCopy = (Library) msm.getLibrary(library.getTag()).ShallowCopy();
+    Library library_shallowCopy = (Library) lm.getLibrary(library.getTag()).ShallowCopy();
     library.getBooks().get(0).getAuthor().setFirstName("Flobby");
     System.out.print("───[ORYGINAŁ]──────────────────────────────────────────");
     System.out.println(library.toString());
@@ -142,7 +143,7 @@ public class LibraryTest {
   public void library_deepCopyTest() throws CloneNotSupportedException {
     dm.testHeader("Zad2. (Library) Deep Copy Test");
 
-    Library library_deepCopy = (Library) msm.getLibrary(library.getTag()).DeepCopy();
+    Library library_deepCopy = (Library) lm.getLibrary(library.getTag()).DeepCopy();
     library.getBooks().get(0).getAuthor().setFirstName("Flobby");
     System.out.print("───[ORYGINAŁ]──────────────────────────────────────────");
     System.out.println(library.toString());
@@ -153,5 +154,17 @@ public class LibraryTest {
     Author deepCopy = library_deepCopy.getBooks().get(0).getAuthor();
     assertNotEquals(original, deepCopy);
     assertNotSame(original, deepCopy);
+  }
+
+  @Test
+  public void simpleFactoryTest() {
+    dm.testHeader("Abstract Factory Test");
+
+    BookFactory factory = new BookFactory();
+
+    AbstractBook book = factory.getBook(new ConcreteBookFactory("aBook", new Author("aName", "aSurname"), "aTitle", 50, 2019));
+    System.out.println("   " + book);
+
+    assertThat(book, instanceOf(ConcreteBook.class));
   }
 }
