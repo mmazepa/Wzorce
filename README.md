@@ -77,10 +77,19 @@ w roku akademickim 2018/2019.
     <td>27.5%</td>
   </tr>
   <tr>
-    <td colspan="3" align="right"><b>SUMA (+obecność) na dzień 09.05.2019:</b></td>
-    <td>13.6/40 pkt</td>
+    <td colspan="3" align="right"><b>OBECNOŚĆ (na dzień 09.05.2019):</b></td>
+    <td>2.6 pkt</td>
+  </tr>
   <tr>
-    <td colspan="3" align="right"><b>PROCENT (+obecność) na dzień 09.05.2019:</b></td>
+    <td colspan="3" align="right"><b>SUMA (+obecność):</b></td>
+    <td>13.6/40 pkt</td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right"><b>PROCENT (+obecność):</b></td>
     <td>34%</td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right"><b>OCENA:</b></td>
+    <td>2.0</td>
   </tr>
 </table>
