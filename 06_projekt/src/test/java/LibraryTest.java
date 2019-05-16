@@ -4,12 +4,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.File;
+
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 public class LibraryTest {
+  static String filename = "instance.ser";
+
   static Author author1;
   static Author author2;
   static Author author3;
@@ -29,23 +35,27 @@ public class LibraryTest {
   static DisplayManager dm = new DisplayManager();
   static LibraryManager lm = new LibraryManager();
   static BookManager bm = new BookManager();
-  // static BuilderManager brm = new BuilderManager();
 
   @BeforeClass
-  public static void setUpClass() {
+  public static void setUpClass() throws FileNotFoundException, IOException, ClassNotFoundException {
     dm.mainHeader();
     System.out.println("Rozpoczęcie testowania...");
+
+    lm.serialize(Library.getInstance(), filename);
   }
 
   @AfterClass
   public static void tearDownClass() {
     dm.horizontalLine(55);
+    // new File(filename).delete();
     System.out.println("Testowanie zakończone.");
     System.out.print("\n");
   }
 
   @Before
   public void setUp() {
+    dm.horizontalLine(55);
+
     author1 = new Author("Joanne Kathleen", "Rowling");
     author2 = new Author("Krystyna", "Siesicka");
     author3 = new Author("Stephen", "King");
@@ -62,21 +72,62 @@ public class LibraryTest {
     books.add(book1);
     books.add(book2);
     books.add(book3);
-
-    library = new Library(libraryTag, libraryName, books);
-    lm.setLibrary(libraryTag, library);
-
-    dm.horizontalLine(55);
   }
 
   @After
   public void tearDown() {
-    // dm.horizontalLine(55);
+    lm.resetSingleton(Library.class, "instance");
+  }
+
+  @Test
+  public void librarySingletonTest() {
+    dm.testHeader("Library Singleton Test");
+
+    Library instance1 = Library.getInstance();
+    Library instance2 = Library.getInstance();
+
+    assertThat(instance2.hashCode(), equalTo(instance1.hashCode()));
+    lm.displayHashCodes(instance1, instance2);
+  }
+
+  @Test
+  public void serializationWithInstanceTest() throws FileNotFoundException, IOException, ClassNotFoundException {
+    dm.testHeader("Serialization WITH Instance Test");
+
+    Library instance1 = Library.getInstance();
+    Library instance2;
+    Library instance3;
+
+    lm.serialize(instance1, filename);
+    instance2 = lm.deserialize(filename);
+
+    assertThat(instance2, instanceOf(Library.class));
+    assertThat(instance2.hashCode(), not(equalTo(instance1.hashCode())));
+    assertNotSame(instance2, instance1);
+
+    instance3 = Library.getInstance();
+    assertThat(instance3, instanceOf(Library.class));
+    assertThat(instance3.hashCode(), equalTo(instance2.hashCode()));
+    assertSame(instance3, instance2);
+    lm.displayHashCodes(instance1, instance2, instance3);
+  }
+
+  @Test
+  public void serializationWithoutInstanceTest() throws FileNotFoundException, IOException, ClassNotFoundException {
+    dm.testHeader("Serialization WITHOUT Instance Test");
+
+    Library instance1 = lm.deserialize(filename);
+    Library instance2 = Library.getInstance();
+
+    assertThat(instance1, instanceOf(Library.class));
+    assertThat(instance1.hashCode(), equalTo(instance2.hashCode()));
+    assertSame(instance1, instance2);
+    lm.displayHashCodes(instance1, instance2);
   }
 
   @Test
   public void book_shallowCopyTest() throws CloneNotSupportedException {
-    dm.testHeader("Zad1. (Book) Shallow Copy Test");
+    dm.testHeader("(Book) Shallow Copy Test");
 
     Book book1_shallowCopy = (Book) bm.getBook(book1.getTag()).ShallowCopy();
     book1.getAuthor().setFirstName("Jadwiga");
@@ -100,7 +151,7 @@ public class LibraryTest {
 
   @Test
   public void book_deepCopyTest() throws CloneNotSupportedException {
-    dm.testHeader("Zad1. (Book) Deep Copy Test");
+    dm.testHeader("(Book) Deep Copy Test");
 
     Book book1_deepCopy = (Book) bm.getBook(book1.getTag()).DeepCopy();
     book1.getAuthor().setFirstName("Jadwiga");
@@ -120,51 +171,5 @@ public class LibraryTest {
     bm.displayBoth("Deep", book3, book3_deepCopy);
     assertNotEquals(book3.getAuthor(), book3_deepCopy.getAuthor());
     assertNotSame(book3.getAuthor(), book3_deepCopy.getAuthor());
-  }
-
-  @Test
-  public void library_shallowCopyTest() throws CloneNotSupportedException {
-    dm.testHeader("Zad2. (Library) Shallow Copy Test");
-
-    Library library_shallowCopy = (Library) lm.getLibrary(library.getTag()).ShallowCopy();
-    library.getBooks().get(0).getAuthor().setFirstName("Flobby");
-    System.out.print("───[ORYGINAŁ]──────────────────────────────────────────");
-    System.out.println(library.toString());
-    System.out.print("───[SHALLOW COPY]──────────────────────────────────────");
-    System.out.println(library_shallowCopy.toString());
-
-    Author original = library.getBooks().get(0).getAuthor();
-    Author shallowCopy = library_shallowCopy.getBooks().get(0).getAuthor();
-    assertEquals(original, shallowCopy);
-    assertSame(original, shallowCopy);
-  }
-
-  @Test
-  public void library_deepCopyTest() throws CloneNotSupportedException {
-    dm.testHeader("Zad2. (Library) Deep Copy Test");
-
-    Library library_deepCopy = (Library) lm.getLibrary(library.getTag()).DeepCopy();
-    library.getBooks().get(0).getAuthor().setFirstName("Flobby");
-    System.out.print("───[ORYGINAŁ]──────────────────────────────────────────");
-    System.out.println(library.toString());
-    System.out.print("───[DEEP COPY]─────────────────────────────────────────");
-    System.out.println(library_deepCopy.toString());
-
-    Author original = library.getBooks().get(0).getAuthor();
-    Author deepCopy = library_deepCopy.getBooks().get(0).getAuthor();
-    assertNotEquals(original, deepCopy);
-    assertNotSame(original, deepCopy);
-  }
-
-  @Test
-  public void simpleFactoryTest() {
-    dm.testHeader("Abstract Factory Test");
-
-    BookFactory factory = new BookFactory();
-
-    AbstractBook book = factory.getBook(new ConcreteBookFactory("aBook", new Author("aName", "aSurname"), "aTitle", 50, 2019));
-    System.out.println("   " + book);
-
-    assertThat(book, instanceOf(ConcreteBook.class));
   }
 }

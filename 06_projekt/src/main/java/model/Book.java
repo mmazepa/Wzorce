@@ -1,4 +1,6 @@
-class Book extends Prototype implements Cloneable {
+import java.io.Serializable;
+
+class Book extends Prototype implements Cloneable, Serializable {
   private String tag;
   private Author author;
   private String title;

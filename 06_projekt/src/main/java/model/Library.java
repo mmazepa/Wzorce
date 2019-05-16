@@ -1,19 +1,31 @@
+import java.io.Serializable;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import java.util.ArrayList;
 
-class Library extends Prototype implements Cloneable {
+class Library implements Serializable {
+  private static Library instance;
+
   private String tag;
   private String name;
   private ArrayList<Book> books;
 
-  public Library(String tag, String name, ArrayList<Book> books) {
-    this.tag = tag;
-    this.name = name;
-    this.books = books;
+  private Library() {
+    System.out.println("Library():     Inicjalizowanie instacji.");
   }
 
-  public Library(Library library) throws CloneNotSupportedException {
-    this(library.getTag(), library.getName(), library.prepareClonedBooks(library));
-  }
+	public static Library getInstance() {
+		if (instance == null) {
+			synchronized(Library.class) {
+				if (instance == null) {
+					System.out.println("getInstance(): Pierwsze wywołanie.");
+					instance = new Library();
+				}
+			}
+		}
+		return instance;
+	}
 
   String getTag() { return this.tag; }
   void setTag(String tag) { this.tag = tag; }
@@ -42,15 +54,16 @@ class Library extends Prototype implements Cloneable {
     return generalInfo;
   }
 
-  @Override
-  public Object ShallowCopy() throws CloneNotSupportedException {
-    System.out.println("[SHALLOW COPYING]: " + this.toString());
-    return (Prototype) this.clone();
-  }
-
-  @Override
-  public Object DeepCopy() throws CloneNotSupportedException {
-    System.out.println("[DEEP COPYING]: " + this.toString());
-    return (Prototype) new Library(this);
+  protected Object readResolve() throws FileNotFoundException, IOException, ClassNotFoundException {
+    System.out.println("\nFromFile: " + this.hashCode());
+    if (instance == null) {
+      System.out.println("Instance:      " + null + "\n");
+      System.out.println("readResolve(): Instancja nie istnieje, biorę z pliku.");
+    } else {
+      System.out.println("Instance: " + instance.hashCode() + "\n");
+      System.out.println("readResolve(): Instancja istnieje, podmieniam z pliku.");
+    }
+    instance = this;
+    return instance;
   }
 }

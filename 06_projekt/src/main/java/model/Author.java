@@ -1,4 +1,6 @@
-class Author {
+import java.io.Serializable;
+
+class Author implements Serializable {
   private String firstName;
   private String lastName;
 
