@@ -10,14 +10,14 @@ import java.lang.reflect.Field;
 
 class LibraryManager {
   public static void displayHashCodes(Library instance1, Library instance2) {
-      System.out.println("Instance 1:    " + instance1.hashCode());
-      System.out.println("Instance 2:    " + instance2.hashCode());
+      System.out.println("Instance 1: " + instance1.hashCode());
+      System.out.println("Instance 2: " + instance2.hashCode());
   }
 
   public static void displayHashCodes(Library instance1, Library instance2, Library instance3) {
-      System.out.println("Instance FromFile:    " + instance1.hashCode());
-      System.out.println("Instance Existing:    " + instance2.hashCode());
-      System.out.println("Instance Current:     " + instance3.hashCode());
+      System.out.println("Instance: " + instance1.hashCode());
+      System.out.println("FromFile: " + instance2.hashCode());
+      System.out.println("Instance: " + instance3.hashCode());
   }
 
   public static void resetSingleton(Class theClass, String fieldName) {

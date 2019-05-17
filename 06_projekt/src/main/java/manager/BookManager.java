@@ -2,17 +2,17 @@ import java.util.Map;
 import java.util.HashMap;
 
 class BookManager {
-  private static Map<String, Prototype> books = new HashMap<String, Prototype>();
+  private static Map<String, LibraryItemPrototype> books = new HashMap<String, LibraryItemPrototype>();
 
-  public static Prototype getBook(String key) {
+  public static LibraryItemPrototype getBook(String key) {
     return books.get(key);
   }
 
-  public static void setBook(String key, Prototype bookPrototype) {
+  public static void setBook(String key, LibraryItemPrototype bookPrototype) {
     books.put(key, bookPrototype);
   }
 
-  public static Map<String, Prototype> getAllBooks() {
+  public static Map<String, LibraryItemPrototype> getAllBooks() {
     return books;
   }
 

@@ -47,7 +47,7 @@ public class LibraryTest {
   @AfterClass
   public static void tearDownClass() {
     dm.horizontalLine(55);
-    // new File(filename).delete();
+    new File(filename).delete();
     System.out.println("Testowanie zakończone.");
     System.out.print("\n");
   }
@@ -171,5 +171,34 @@ public class LibraryTest {
     bm.displayBoth("Deep", book3, book3_deepCopy);
     assertNotEquals(book3.getAuthor(), book3_deepCopy.getAuthor());
     assertNotSame(book3.getAuthor(), book3_deepCopy.getAuthor());
+  }
+
+  @Test
+  public void decoratorTest() {
+    dm.testHeader("Simple Decorator Test");
+
+    String borrower1 = "Pan Stanisław";
+    String borrower2 = "Pani Gertruda";
+
+    LibraryItemPrototype book = bm.getBook(book1.getTag());
+    book.setCopies(2);
+    Borrowable borrowBook = new Borrowable(book);
+    assertEquals(book.getCopies(), 2);
+
+    System.out.println("Dostępne egzemplarze: " + book.getCopies());
+    borrowBook.borrowItem(borrower1);
+    assertEquals(book.getCopies(), 1);
+
+    System.out.println("Dostępne egzemplarze: " + book.getCopies());
+    borrowBook.borrowItem(borrower2);
+    assertEquals(book.getCopies(), 0);
+
+    System.out.println("Dostępne egzemplarze: " + book.getCopies());
+    borrowBook.returnItem(borrower1);
+    assertEquals(book.getCopies(), 1);
+
+    System.out.println("Dostępne egzemplarze: " + book.getCopies());
+    System.out.print("\n");
+    System.out.println(borrowBook);
   }
 }

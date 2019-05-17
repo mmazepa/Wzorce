@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-class Book extends Prototype implements Cloneable, Serializable {
+class Book extends LibraryItemPrototype implements Cloneable, Serializable {
   private String tag;
   private Author author;
   private String title;
@@ -41,12 +41,12 @@ class Book extends Prototype implements Cloneable, Serializable {
   @Override
   public Object ShallowCopy() throws CloneNotSupportedException {
     System.out.println("[SHALLOW COPYING]: " + this.toString());
-    return (Prototype) this.clone();
+    return (LibraryItemPrototype) this.clone();
   }
 
   @Override
   public Object DeepCopy() throws CloneNotSupportedException {
     System.out.println("[DEEP COPYING]: " + this.toString());
-    return (Prototype) new Book(this);
+    return (LibraryItemPrototype) new Book(this);
   }
 }
