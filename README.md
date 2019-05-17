@@ -50,17 +50,17 @@ w roku akademickim 2018/2019.
       Zadanie duże (projekt)
     </td>
     <td rowspan="6">-</td>
-    <td>-</td>
+    <td>Singleton</td>
     <td rowspan="6">0/20 pkt</td>
   </tr>
   <tr>
-    <td>-</td>
+    <td>Prototyp</td>
   </tr>
   <tr>
-    <td>-</td>
+    <td>Dekorator</td>
   </tr>
   <tr>
-    <td>-</td>
+    <td>Fasada</td>
   </tr>
   <tr>
     <td>-</td>

@@ -7,9 +7,9 @@ import java.util.ArrayList;
 class Library implements Serializable {
   private static Library instance;
 
-  private String tag;
-  private String name;
-  private ArrayList<Book> books;
+  private static String tag;
+  private static String name;
+  private static ArrayList<Book> books;
 
   private Library() {
     System.out.println("Library():     Inicjalizowanie instacji.");

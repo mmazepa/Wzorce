@@ -38,6 +38,23 @@ class Book extends LibraryItemPrototype implements Cloneable, Serializable {
     return this.author.toString() + ", \"" + this.title + "\", " + this.pages + ", " + this.year;
   }
 
+  public boolean isAvailable(Library library) {
+    boolean available = true;
+    // System.out.println(this);
+    if (!library.getBooks().contains(this))
+      available = false;
+    if (this.getCopies() <= 0)
+      available = false;
+    return available;
+  }
+
+  public boolean isFromThisLibrary(Library library) {
+    boolean fromThisLibrary = true;
+    if (!library.getBooks().contains(this))
+      fromThisLibrary = false;
+    return fromThisLibrary;
+  }
+
   @Override
   public Object ShallowCopy() throws CloneNotSupportedException {
     System.out.println("[SHALLOW COPYING]: " + this.toString());

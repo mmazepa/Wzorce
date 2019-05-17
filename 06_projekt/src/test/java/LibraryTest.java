@@ -201,4 +201,19 @@ public class LibraryTest {
     System.out.print("\n");
     System.out.println(borrowBook);
   }
+
+  @Test
+  public void facadeTest() {
+    dm.testHeader("Simple Facade Test");
+
+    String borrower = "Pan Stanisław";
+    Book bookToBorrow = book1;
+
+    BorrowFacade facade = new BorrowFacade();
+    String borrowing = facade.borrowItem(bookToBorrow, borrower);
+    String returning = facade.returnItem(bookToBorrow, borrower);
+
+    System.out.println("Wypożyczam: " + borrowing);
+    System.out.println("Oddaję:     " + returning);
+  }
 }
