@@ -109,6 +109,7 @@ public class LibraryTest {
     assertThat(instance3, instanceOf(Library.class));
     assertThat(instance3.hashCode(), equalTo(instance2.hashCode()));
     assertSame(instance3, instance2);
+
     lm.displayHashCodes(instance1, instance2, instance3);
   }
 
@@ -231,5 +232,30 @@ public class LibraryTest {
     System.out.println("GOŚĆ BEZ KARTY:");
     borrowing = facade.borrowItem(bookToBorrow, borrower);
     System.out.println("   Wypożyczam: " + borrowing);
+  }
+
+  @Test
+  public void iteratorTest() {
+    dm.testHeader("Simple Iterator Test");
+
+    BookAggregate ba = new BookAggregate();
+    ArrayList<Book> books = new ArrayList<Book>();
+    books.add(book1);
+    books.add(book2);
+    books.add(book3);
+    ba.setBooks(books);
+
+    Iterator iterator = ba.CreateIterator();
+
+    System.out.println("Przeglądanie katalogu książek...");
+
+    Object book = iterator.First();
+    while (book != null) {
+      System.out.println("   " + book);
+      if (iterator.HasNext())
+        book = iterator.Next();
+      else
+        break;
+    }
   }
 }

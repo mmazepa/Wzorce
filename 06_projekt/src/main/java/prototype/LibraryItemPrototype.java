@@ -1,8 +1,13 @@
 abstract class LibraryItemPrototype {
   public int copies;
 
-  int getCopies() { return this.copies; }
-  void setCopies(int copies) { this.copies = copies; }
+  int getCopies() {
+    return this.copies;
+  }
+
+  void setCopies(int copies) {
+    this.copies = copies;
+  }
 
   public abstract String toString();
 
