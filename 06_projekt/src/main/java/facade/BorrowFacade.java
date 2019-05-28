@@ -6,7 +6,7 @@ class BorrowFacade {
   }
 
   public String borrowItem(Borrowable book, Borrower borrower) {
-    if (borrower.getLibraryCard()) {
+    if (libraryCard.hasLibraryCard(borrower)) {
       if (book.getCopies() > 0) {
         book.borrowItem(borrower);
         return "Książka wypożyczona!";
@@ -19,7 +19,7 @@ class BorrowFacade {
   }
 
   public String returnItem(Borrowable book, Borrower borrower) {
-    if (borrower.getLibraryCard()) {
+    if (libraryCard.hasLibraryCard(borrower)) {
       book.returnItem(borrower);
       return "Książka oddana!";
     } else {

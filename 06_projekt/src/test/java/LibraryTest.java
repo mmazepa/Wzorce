@@ -177,8 +177,8 @@ public class LibraryTest {
   public void decoratorTest() {
     dm.testHeader("Simple Decorator Test");
 
-    Borrower borrower1 = new Borrower("Książka", "Stanisław");
-    Borrower borrower2 = new Borrower("Myśliciel", "Gertruda");
+    Borrower borrower1 = new Borrower("Stanisław", "Książka");
+    Borrower borrower2 = new Borrower("Gertruda", "Myśliciel");
 
     LibraryItemPrototype book = bm.getBook(book1.getTag());
     book.setCopies(2);
@@ -186,14 +186,20 @@ public class LibraryTest {
     assertEquals(book.getCopies(), 2);
 
     System.out.println("Dostępne egzemplarze: " + book.getCopies());
+    System.out.print("\n");
+    System.out.println(borrowBook);
     borrowBook.borrowItem(borrower1);
     assertEquals(book.getCopies(), 1);
 
     System.out.println("Dostępne egzemplarze: " + book.getCopies());
+    System.out.print("\n");
+    System.out.println(borrowBook);
     borrowBook.borrowItem(borrower2);
     assertEquals(book.getCopies(), 0);
 
     System.out.println("Dostępne egzemplarze: " + book.getCopies());
+    System.out.print("\n");
+    System.out.println(borrowBook);
     borrowBook.returnItem(borrower1);
     assertEquals(book.getCopies(), 1);
 
@@ -206,24 +212,24 @@ public class LibraryTest {
   public void facadeTest() {
     dm.testHeader("Simple Facade Test");
 
-    Borrower borrower = new Borrower("Książka", "Stanisław");
+    Borrower borrower = new Borrower("Stanisław", "Książka");
     borrower.setLibraryCard(true);
 
     Borrowable bookToBorrow = new Borrowable(book1);
     bookToBorrow.setCopies(1);
 
     BorrowFacade facade = new BorrowFacade();
-    String borrowing = facade.borrowItem(bookToBorrow, borrower);
-    String returning = facade.returnItem(bookToBorrow, borrower);
 
     System.out.println("POSIADACZ KARTY:");
+    String borrowing = facade.borrowItem(bookToBorrow, borrower);
     System.out.println("   Wypożyczam: " + borrowing);
+    String returning = facade.returnItem(bookToBorrow, borrower);
     System.out.println("   Oddaję:     " + returning);
 
     borrower.setLibraryCard(false);
-    borrowing = facade.borrowItem(bookToBorrow, borrower);
 
     System.out.println("GOŚĆ BEZ KARTY:");
+    borrowing = facade.borrowItem(bookToBorrow, borrower);
     System.out.println("   Wypożyczam: " + borrowing);
   }
 }
