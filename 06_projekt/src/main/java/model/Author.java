@@ -1,35 +1,11 @@
 import java.io.Serializable;
 
-class Author implements Serializable {
-  private String firstName;
-  private String lastName;
-
+class Author extends Person implements Serializable {
   public Author(String firstName, String lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+    super(firstName, lastName);
   }
 
   public Author(Author author) {
-    this(author.getFirstName(), author.getLastName());
-  }
-
-  String getFirstName() {
-    return this.firstName;
-  }
-
-  void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  String getLastName() {
-    return this.lastName;
-  }
-
-  void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public String toString() {
-    return this.lastName.toUpperCase() + " " + this.firstName;
+    super(author.getFirstName(), author.getLastName());
   }
 }

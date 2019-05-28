@@ -177,8 +177,8 @@ public class LibraryTest {
   public void decoratorTest() {
     dm.testHeader("Simple Decorator Test");
 
-    String borrower1 = "Pan Stanisław";
-    String borrower2 = "Pani Gertruda";
+    Borrower borrower1 = new Borrower("Książka", "Stanisław");
+    Borrower borrower2 = new Borrower("Myśliciel", "Gertruda");
 
     LibraryItemPrototype book = bm.getBook(book1.getTag());
     book.setCopies(2);
@@ -206,14 +206,24 @@ public class LibraryTest {
   public void facadeTest() {
     dm.testHeader("Simple Facade Test");
 
-    String borrower = "Pan Stanisław";
-    Book bookToBorrow = book1;
+    Borrower borrower = new Borrower("Książka", "Stanisław");
+    borrower.setLibraryCard(true);
+
+    Borrowable bookToBorrow = new Borrowable(book1);
+    bookToBorrow.setCopies(1);
 
     BorrowFacade facade = new BorrowFacade();
     String borrowing = facade.borrowItem(bookToBorrow, borrower);
     String returning = facade.returnItem(bookToBorrow, borrower);
 
-    System.out.println("Wypożyczam: " + borrowing);
-    System.out.println("Oddaję:     " + returning);
+    System.out.println("POSIADACZ KARTY:");
+    System.out.println("   Wypożyczam: " + borrowing);
+    System.out.println("   Oddaję:     " + returning);
+
+    borrower.setLibraryCard(false);
+    borrowing = facade.borrowItem(bookToBorrow, borrower);
+
+    System.out.println("GOŚĆ BEZ KARTY:");
+    System.out.println("   Wypożyczam: " + borrowing);
   }
 }

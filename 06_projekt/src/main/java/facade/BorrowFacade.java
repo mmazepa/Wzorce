@@ -1,33 +1,29 @@
 class BorrowFacade {
-  private Library library;
-  private Borrowable borrowable;
+  private LibraryCard libraryCard;
 
   public BorrowFacade() {
-    library = Library.getInstance();
-    // System.out.println(library);
+    libraryCard = new LibraryCard();
   }
 
-  public String borrowItem(Book book, String borrower) {
-    borrowable = new Borrowable(book);
-    // if (book.isFromThisLibrary(library)) {
-    //   if (book.isAvailable(library)) {
-        borrowable.borrowItem(borrower);
+  public String borrowItem(Borrowable book, Borrower borrower) {
+    if (borrower.getLibraryCard()) {
+      if (book.getCopies() > 0) {
+        book.borrowItem(borrower);
         return "Książka wypożyczona!";
-    //   } else {
-    //     return "Książka niedostępna do wypożyczenia!";
-    //   }
-    // } else {
-    //   return "Książka nie należy do zasobów tej biblioteki!";
-    // }
+      } else {
+        return "Książka niedostępna do wypożyczenia!";
+      }
+    } else {
+      return "Wypożyczający nie posiada karty bibliotecznej!";
+    }
   }
 
-  public String returnItem(Book book, String borrower) {
-    borrowable = new Borrowable(book);
-    // if (book.isFromThisLibrary(library)) {
-      borrowable.returnItem(borrower);
+  public String returnItem(Borrowable book, Borrower borrower) {
+    if (borrower.getLibraryCard()) {
+      book.returnItem(borrower);
       return "Książka oddana!";
-    // } else {
-    //   return "Książka nie należy do zasobów tej biblioteki!";
-    // }
+    } else {
+      return "Wypożyczający nie posiada karty bibliotecznej!";
+    }
   }
 }
