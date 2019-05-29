@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 class Borrowable extends Decorator {
   protected ArrayList<Borrower> borrowers = new ArrayList<Borrower>();
+  protected ArrayList<Observer> observers = new ArrayList<Observer>();
 
   public Borrowable(LibraryItemPrototype libraryItem) {
     super(libraryItem);
@@ -15,6 +16,26 @@ class Borrowable extends Decorator {
   public void returnItem(Borrower borrower) {
     borrowers.remove(borrower);
     libraryItem.copies++;
+  }
+
+  public void Attach(Observer observer) {
+    observers.add(observer);
+  }
+
+  public void Detach(Observer observer) {
+    observers.remove(observer);
+  }
+
+  public void Notify() {
+    for (Observer observer : observers) {
+      observer.Update(this);
+    }
+  }
+
+  @Override
+  void setCopies(int copies) {
+    this.copies = copies;
+    Notify();
   }
 
   @Override

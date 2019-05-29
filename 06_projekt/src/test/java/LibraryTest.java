@@ -258,4 +258,23 @@ public class LibraryTest {
         break;
     }
   }
+
+  @Test
+  public void observatorTest() {
+    dm.testHeader("Simple Observator Test");
+
+    Observer observer1 = new BookObserver("Janusz", "Kowalski");
+    Observer observer2 = new BookObserver("Ryszard", "Nowak");
+    Observer observer3 = new BookObserver("Zygmunt", "Malinowski");
+
+    Borrowable book = new Borrowable(book1);
+    book.Attach(observer1);
+    book.Attach(observer2);
+    book.Attach(observer3);
+
+    for (int i = 0; i < 3; i++) {
+      System.out.println("\n----- [ZMIENIŁA SIĘ ILOŚĆ DOSTĘPNYCH EGZEMPLARZY] -----");
+      book.setCopies(i+1);
+    }
+  }
 }

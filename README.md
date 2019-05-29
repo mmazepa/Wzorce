@@ -63,10 +63,10 @@ w roku akademickim 2018/2019.
     <td>Fasada</td>
   </tr>
   <tr>
-    <td>Iterator</td>
+    <td>Obserwator</td>
   </tr>
   <tr>
-    <td>-</td>
+    <td>Iterator</td>
   </tr>
   <tr>
     <td colspan="3" align="right"><b>SUMA (ogółem):</b></td>
