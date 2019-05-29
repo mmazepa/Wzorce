@@ -10,12 +10,12 @@ class Borrowable extends Decorator {
 
   public void borrowItem(Borrower borrower) {
     borrowers.add(borrower);
-    libraryItem.copies--;
+    libraryItem.setCopies(libraryItem.getCopies() - 1);
   }
 
   public void returnItem(Borrower borrower) {
     borrowers.remove(borrower);
-    libraryItem.copies++;
+    libraryItem.setCopies(libraryItem.getCopies() + 1);
   }
 
   public void Attach(Observer observer) {

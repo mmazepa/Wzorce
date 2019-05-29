@@ -184,25 +184,25 @@ public class LibraryTest {
     LibraryItemPrototype book = bm.getBook(book1.getTag());
     book.setCopies(2);
     Borrowable borrowBook = new Borrowable(book);
-    assertEquals(book.getCopies(), 2);
+    assertEquals(2, book.getCopies());
 
     System.out.println("Dostępne egzemplarze: " + book.getCopies());
     System.out.print("\n");
     System.out.println(borrowBook);
     borrowBook.borrowItem(borrower1);
-    assertEquals(book.getCopies(), 1);
+    assertEquals(1, book.getCopies());
 
     System.out.println("Dostępne egzemplarze: " + book.getCopies());
     System.out.print("\n");
     System.out.println(borrowBook);
     borrowBook.borrowItem(borrower2);
-    assertEquals(book.getCopies(), 0);
+    assertEquals(0, book.getCopies());
 
     System.out.println("Dostępne egzemplarze: " + book.getCopies());
     System.out.print("\n");
     System.out.println(borrowBook);
     borrowBook.returnItem(borrower1);
-    assertEquals(book.getCopies(), 1);
+    assertEquals(1, book.getCopies());
 
     System.out.println("Dostępne egzemplarze: " + book.getCopies());
     System.out.print("\n");
@@ -224,14 +224,17 @@ public class LibraryTest {
     System.out.println("POSIADACZ KARTY:");
     String borrowing = facade.borrowItem(bookToBorrow, borrower);
     System.out.println("   Wypożyczam: " + borrowing);
+    assertEquals(1, bookToBorrow.borrowers.size());
     String returning = facade.returnItem(bookToBorrow, borrower);
     System.out.println("   Oddaję:     " + returning);
+    assertEquals(0, bookToBorrow.borrowers.size());
 
     borrower.setLibraryCard(false);
 
     System.out.println("GOŚĆ BEZ KARTY:");
     borrowing = facade.borrowItem(bookToBorrow, borrower);
     System.out.println("   Wypożyczam: " + borrowing);
+    assertEquals(0, bookToBorrow.borrowers.size());
   }
 
   @Test
@@ -252,6 +255,7 @@ public class LibraryTest {
     Object book = iterator.First();
     while (book != null) {
       System.out.println("   " + book);
+      assertNotNull(book);
       if (iterator.HasNext())
         book = iterator.Next();
       else
@@ -271,6 +275,8 @@ public class LibraryTest {
     book.Attach(observer1);
     book.Attach(observer2);
     book.Attach(observer3);
+
+    assertEquals(3, book.observers.size());
 
     for (int i = 0; i < 3; i++) {
       System.out.println("\n----- [ZMIENIŁA SIĘ ILOŚĆ DOSTĘPNYCH EGZEMPLARZY] -----");
