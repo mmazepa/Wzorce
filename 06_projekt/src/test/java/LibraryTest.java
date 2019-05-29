@@ -176,7 +176,7 @@ public class LibraryTest {
 
   @Test
   public void decoratorTest() {
-    dm.testHeader("Simple Decorator Test");
+    dm.testHeader("(Borrowable) Decorator Test");
 
     Borrower borrower1 = new Borrower("Stanisław", "Książka");
     Borrower borrower2 = new Borrower("Gertruda", "Myśliciel");
@@ -211,7 +211,7 @@ public class LibraryTest {
 
   @Test
   public void facadeTest() {
-    dm.testHeader("Simple Facade Test");
+    dm.testHeader("Facade Test");
 
     Borrower borrower = new Borrower("Stanisław", "Książka");
     borrower.setLibraryCard(true);
@@ -236,7 +236,7 @@ public class LibraryTest {
 
   @Test
   public void iteratorTest() {
-    dm.testHeader("Simple Iterator Test");
+    dm.testHeader("Iterator Test");
 
     BookAggregate ba = new BookAggregate();
     ArrayList<Book> books = new ArrayList<Book>();
@@ -261,7 +261,7 @@ public class LibraryTest {
 
   @Test
   public void observatorTest() {
-    dm.testHeader("Simple Observator Test");
+    dm.testHeader("Observer Test");
 
     Observer observer1 = new BookObserver("Janusz", "Kowalski");
     Observer observer2 = new BookObserver("Ryszard", "Nowak");
