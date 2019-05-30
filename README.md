@@ -49,9 +49,9 @@ w roku akademickim 2018/2019.
     <td rowspan="6">
       Zadanie duże (projekt)
     </td>
-    <td rowspan="6">-</td>
+    <td rowspan="6">30.05.2019</td>
     <td>Singleton</td>
-    <td rowspan="6">0/20 pkt</td>
+    <td rowspan="6">20/20 pkt</td>
   </tr>
   <tr>
     <td>Prototyp</td>
@@ -70,26 +70,26 @@ w roku akademickim 2018/2019.
   </tr>
   <tr>
     <td colspan="3" align="right"><b>SUMA (ogółem):</b></td>
-    <td>11/40 pkt</td>
+    <td>31/40 pkt</td>
   </tr>
   <tr>
     <td colspan="3" align="right"><b>PROCENT (ogółem):</b></td>
-    <td>27.5%</td>
+    <td>77.5%</td>
   </tr>
   <tr>
-    <td colspan="3" align="right"><b>OBECNOŚĆ (na dzień 09.05.2019):</b></td>
+    <td colspan="3" align="right"><b>OBECNOŚĆ (na dzień 30.05.2019):</b></td>
     <td>2.6 pkt</td>
   </tr>
   <tr>
     <td colspan="3" align="right"><b>SUMA (+obecność):</b></td>
-    <td>13.6/40 pkt</td>
+    <td>33.6/40 pkt</td>
   </tr>
   <tr>
     <td colspan="3" align="right"><b>PROCENT (+obecność):</b></td>
-    <td>34%</td>
+    <td>84%</td>
   </tr>
   <tr>
     <td colspan="3" align="right"><b>OCENA:</b></td>
-    <td>2.0</td>
+    <td>4.5</td>
   </tr>
 </table>
